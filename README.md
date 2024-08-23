@@ -11,5 +11,5 @@ Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 ## Wiki
 Puede acceder a la Wiki mediante el siguiente enlace: ???
 
-##Videos
+## Videos
 * [Video Presentación Cliente](https://www.youtube.com/watch?v=abJau21SDIk&ab_channel=RicardoSalasLetelier)
