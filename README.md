@@ -2,10 +2,10 @@
 
 Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 
-* Alejandro Sánchez - 202273605-4
-* Constanza Hidalgo - 202273617-8
-* Daniel Quispe - 202273529-5
-* Matías Fernández - 202273506-6
+* <u>Alejandro Sánchez</u> - 202273605-4
+* <u>Constanza Hidalgo</u> - 202273617-8
+* <u>Daniel Quispe</u> - 202273529-5
+* <u>Matías Fernández</u> - 202273506-6
 * **Tutor**: Ignacio Muñoz
 
 ## Wiki
