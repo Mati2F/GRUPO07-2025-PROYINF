@@ -2,7 +2,7 @@
 
 Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 
-* <mark>Alejandro Sánchez</mark> - 202273605-4
+* <strong>Alejandro Sánchez</strong> - 202273605-4
 * <mark>Constanza Hidalgo</mark> - 202273617-8
 * <mark>Daniel Quispe</mark> - 202273529-5
 * <mark>Matías Fernández</mark> - 202273506-6
