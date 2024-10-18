@@ -21,4 +21,6 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
 <p> Para lograr lo anterior se seguirá un procedimiento sistemático de postulación de objetivos y criterios de éxito, los cuales se irán progresando a través de distintas herramientas de modelamiento como lo son los diagramas de contexto, modelo de dominio, diagramas de secuencia, etc e historias de usuario, para poder entender el punto de vista del cliente. Junto con ello se iran implementando las distintas propuestas planteadas en el trabajo a través de 5 hitos en fechas distintas. </p>
 
 ## Información para levantar el proyecto:
-(Aqui escribes como va el tema dani)
+* punto 1
+* punto 2
+* punto 3
