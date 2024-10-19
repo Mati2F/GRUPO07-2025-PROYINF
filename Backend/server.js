@@ -18,7 +18,7 @@ app.get('/', (re, res) => {
 })
 
 app.get('/w1', (req, res) => {
-    const sql = "SELECT url FROM imagenes WHERE id = 1";
+    const sql = "SELECT url FROM imagenes";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
