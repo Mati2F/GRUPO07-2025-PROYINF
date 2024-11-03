@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import ImagesModel from "../models/ImagesModel.js";
 
 export const getAllImagenes = async (req, res) => {
@@ -12,12 +11,12 @@ export const getAllImagenes = async (req, res) => {
 
 export const getImages = async (req, res) => {
     try {
-        const images = ImagesModel.findAll({
+        const images = await ImagesModel.findAll({
             where: {
-                id: req.params.id,
+                id: req.params.id
             }
         })
-        res.json(images)
+        res.json(images[0])
     } catch (error) {
         res.json({message: error.message})
     }
@@ -27,7 +26,7 @@ export const createImages = async (req, res) =>{
     try {
         await ImagesModel.create(req.body)
         res.json({
-            "message": "si",
+            "message": "si"
         })
     } catch (error) {
         res.json({message: error.message})
@@ -40,7 +39,7 @@ export const updateImages = async (req, res) => {
             where: {id: req.params.id}
         })
         res.json({
-            "message": "si",
+            "message": "si"
         })
     } catch (error) {
         res.json({message: error.message})
@@ -53,7 +52,7 @@ export const deleteImages = async (req, res) => {
             where: {id: req.params.id }
         })
         res.json({
-            "message": "si",
+            "message": "si"
         })
     } catch (error) {
         res.json({message: error.message})

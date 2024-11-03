@@ -1,5 +1,5 @@
 import express from 'express'
-import { createImages, deleteImages, getAllImagenes, getImages, updateImages } from '../controllers/BlogController.js'
+import { createImages, deleteImages, getAllImagenes, getImages, updateImages } from '../controllers/imagesController.js'
 const router = express.Router()
 
 router.get('/', getAllImagenes)
