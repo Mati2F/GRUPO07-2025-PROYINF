@@ -6,7 +6,7 @@ import imagesRoutes from './routes/routes.js'
 
 const port = process.env.PORT || 3000
 const app = express()
-app.use(corse())
+app.use(cors())
 app.use(express.json())
 app.use('/images', imagesRoutes)
 
@@ -21,6 +21,7 @@ app.get('/', (re, res) => {
     return res.json("From backend")
 })
 
+/*
 app.get('/w1', (req, res) => {
     const sql = "SELECT url FROM imagenes";
     db.query(sql, (err, data) => {
@@ -35,7 +36,7 @@ app.get('/w2', (req, res) => {
         if(err) return res.json(err);
         return res.json(data);
     })
-})
+})*/
 
 app.listen(port, () =>{
     console.log(`Server is http://localhost:${port}`)

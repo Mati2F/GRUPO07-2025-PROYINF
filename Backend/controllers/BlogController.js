@@ -1,9 +1,9 @@
 import { where } from "sequelize";
-import BlogImages from "../models/BlogImages.js";
+import ImagesModel from "../models/ImagesModel.js";
 
 export const getAllImagenes = async (req, res) => {
     try {
-        const images = await BlogImages.findAll()
+        const images = await ImagesModel.findAll()
         res.json(images)
     } catch (error) {
         res.json({message: error.message})
@@ -12,7 +12,7 @@ export const getAllImagenes = async (req, res) => {
 
 export const getImages = async (req, res) => {
     try {
-        const images = BlogImages.findAll({
+        const images = ImagesModel.findAll({
             where: {
                 id: req.params.id,
             }
@@ -25,7 +25,7 @@ export const getImages = async (req, res) => {
 
 export const createImages = async (req, res) =>{
     try {
-        await BlogImages.create(req.body)
+        await ImagesModel.create(req.body)
         res.json({
             "message": "si",
         })
@@ -36,7 +36,7 @@ export const createImages = async (req, res) =>{
 
 export const updateImages = async (req, res) => {
     try {
-        BlogImages.update(req.body, {
+        ImagesModel.update(req.body, {
             where: {id: req.params.id}
         })
         res.json({
@@ -47,9 +47,9 @@ export const updateImages = async (req, res) => {
     }
 }
 
-export const deleteImages = async (req, ress) => {
+export const deleteImages = async (req, res) => {
     try {
-        await BlogImages.destroy({
+        await ImagesModel.destroy({
             where: {id: req.params.id }
         })
         res.json({
