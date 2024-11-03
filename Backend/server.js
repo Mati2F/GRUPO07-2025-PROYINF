@@ -1,7 +1,6 @@
 import express from "express"
 import cors from 'cors'
 import db from "./database/db.js";
-
 import imagesRoutes from './routes/routes.js'
 
 const port = process.env.PORT || 3000
@@ -12,7 +11,7 @@ app.use('/images', imagesRoutes)
 
 try {
     db.authenticate()
-    console.log("Exito db");
+    console.log("Exito en la conexión de la BD");
 } catch (error) {
     console.log(`Error: ${error}`);
 }
