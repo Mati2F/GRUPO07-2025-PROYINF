@@ -1,17 +1,21 @@
-const express = require('express');
-const mysql = require('mysql');
-const corse = require('cors');
+import express from "express"
+import cors from 'cors'
+import db from "./database/db.js";
+
+import imagesRoutes from './routes/routes.js'
 
 const port = process.env.PORT || 3000
 const app = express()
 app.use(corse())
+app.use(express.json())
+app.use('/images', imagesRoutes)
 
-const db = mysql.createConnection({
-    host : "localhost",
-    user : 'root',
-    password : '',
-    database : 'analisis'
-})
+try {
+    db.authenticate()
+    console.log("Exito db");
+} catch (error) {
+    console.log(`Error: ${error}`);
+}
 
 app.get('/', (re, res) => {
     return res.json("From backend")
