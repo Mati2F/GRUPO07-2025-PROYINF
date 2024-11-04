@@ -26,7 +26,7 @@ export const createImage = async (req, res) =>{
     try {
         await ImagesModel.create(req.body)
         res.json({
-            "message": "si"
+            "message": "creao"
         })
     } catch (error) {
         res.json({message: error.message})
@@ -39,7 +39,7 @@ export const updateImage = async (req, res) => {
             where: {id: req.params.id}
         })
         res.json({
-            "message": "si"
+            "message": "actualizao"
         })
     } catch (error) {
         res.json({message: error.message})
@@ -52,7 +52,7 @@ export const deleteImage = async (req, res) => {
             where: {id: req.params.id }
         })
         res.json({
-            "message": "si"
+            "message": "borrao"
         })
     } catch (error) {
         res.json({message: error.message})
