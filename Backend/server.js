@@ -1,7 +1,6 @@
 import express from "express"
 import cors from 'cors'
 import db from "./database/db.js";
-
 import imagesRoutes from './routes/routes.js'
 
 const port = process.env.PORT || 3000
@@ -36,7 +35,8 @@ app.get('/w2', (req, res) => {
         if(err) return res.json(err);
         return res.json(data);
     })
-})*/
+})
+*/
 
 app.listen(port, () =>{
     console.log(`Server is http://localhost:${port}`)
