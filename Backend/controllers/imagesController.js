@@ -9,6 +9,19 @@ export const getAllImagenes = async (req, res) => {
     }
 }
 
+export const getCateImages = async (req, res) => {
+    try {
+        const images = await ImagesModel.findAll({
+            where: {
+                categorias: req.params.categorias
+            }
+        })
+        res.json(images)
+    } catch (error) {
+        res.json({message: error.message})
+    }
+}
+
 export const getImage = async (req, res) => {
     try {
         const images = await ImagesModel.findAll({
@@ -17,6 +30,7 @@ export const getImage = async (req, res) => {
             }
         })
         res.json(images[0])
+        
     } catch (error) {
         res.json({message: error.message})
     }
