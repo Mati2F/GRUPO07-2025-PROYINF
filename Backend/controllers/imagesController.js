@@ -9,7 +9,7 @@ export const getAllImagenes = async (req, res) => {
     }
 }
 
-export const getImages = async (req, res) => {
+export const getImage = async (req, res) => {
     try {
         const images = await ImagesModel.findAll({
             where: {
@@ -22,7 +22,7 @@ export const getImages = async (req, res) => {
     }
 }
 
-export const createImages = async (req, res) =>{
+export const createImage = async (req, res) =>{
     try {
         await ImagesModel.create(req.body)
         res.json({
@@ -33,7 +33,7 @@ export const createImages = async (req, res) =>{
     }
 }
 
-export const updateImages = async (req, res) => {
+export const updateImage = async (req, res) => {
     try {
         ImagesModel.update(req.body, {
             where: {id: req.params.id}
@@ -46,7 +46,7 @@ export const updateImages = async (req, res) => {
     }
 }
 
-export const deleteImages = async (req, res) => {
+export const deleteImage = async (req, res) => {
     try {
         await ImagesModel.destroy({
             where: {id: req.params.id }

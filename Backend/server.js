@@ -11,7 +11,7 @@ app.use('/images', imagesRoutes)
 
 try {
     db.authenticate()
-    console.log("Exito db");
+    console.log("Exito en la conexión de la BD");
 } catch (error) {
     console.log(`Error: ${error}`);
 }
