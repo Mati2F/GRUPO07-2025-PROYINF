@@ -1,0 +1,16 @@
+{
+  "name": "grupo02-2024-proyinf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "QuispeProject",
+  "license": "ISC",
+  "description":  "Proyecto analisis y diseño de software, grupo 02 año 2024",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mysql": "^2.18.1"
+  }
+}
