@@ -1,8 +1,0 @@
-.imagentwo_one {
-    height: 674px;
-    object-fit: cover;
-    width: 100%;
-    @media only screen and (max-width: 1050px) {
-    height: auto;
-    }
-    }
