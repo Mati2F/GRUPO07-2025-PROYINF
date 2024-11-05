@@ -36,7 +36,7 @@ export const createImage = async (req, res) =>{
 
 export const updateImage = async (req, res) => {
     try {
-        ImagesModel.update(req.body, {
+        await ImagesModel.update(req.body, {
             where: {id: req.params.id}
         })
         res.json({
