@@ -14,13 +14,23 @@ const db = mysql.createConnection({
     database: "analisis"
 })
 
-app.get("/", (req, res) => {
+app.get("/images", (req, res) => {
     const sql = "SELECT * FROM imagenes";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
         return res.json(data)
     })
 })
+
+/* obtener por id
+app.get("/images/:id", (req, res) => {
+    const sql = "SELECT * FROM imagenes WHERE id = ?";
+    const id = req.params.id;
+    db.query(sql, [id], (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data)
+    })
+})*/
 
 /*
 app.get('/', (req, res) => {

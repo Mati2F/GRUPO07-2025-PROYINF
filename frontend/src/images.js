@@ -22,11 +22,9 @@ function Images() {
     filtrar(e.target.value);
   }
 
-
   useEffect(() => {
     peticionGet();
   }, [])
-
 
   const filtrar = (filtro) => {
     var resultado = Taimages.filter((elemento) =>{

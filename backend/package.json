@@ -8,8 +8,9 @@
   "keywords": [],
   "author": "QuispeProject",
   "license": "ISC",
-  "description":  "Proyecto analisis y diseño de software, grupo 02 año 2024",
+  "description": "Proyecto analisis y diseño de software, grupo 02 año 2024",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "mysql": "^2.18.1"
   }
