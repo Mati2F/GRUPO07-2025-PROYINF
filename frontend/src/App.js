@@ -6,7 +6,19 @@ import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 
+import Images from './images.js';
+
 function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element= {<Images/>} />
+      </Routes>
+      </BrowserRouter>
+    </div>
+  );
+  /*
   return (
     <div className = "App">
       <BrowserRouter>
@@ -18,7 +30,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  );
+  );*/
 }
 
 export default App;

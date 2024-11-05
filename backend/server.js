@@ -14,14 +14,22 @@ const db = mysql.createConnection({
     database: "analisis"
 })
 
+app.get("/", (req, res) => {
+    const sql = "SELECT * FROM imagenes";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data)
+    })
+})
 
+/*
 app.get('/', (req, res) => {
     const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
         return res.json(data);
     })
-})
+})*/
 
 app.post('/create', (req,res) => {
     const sql = "INSERT INTO users(`Rol`, `Correo`, `Nombre`, `Apellidos`) VALUES (?)";
