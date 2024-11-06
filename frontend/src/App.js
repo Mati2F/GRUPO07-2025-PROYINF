@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Home from './Home'
+import Admin from './Admin'
 import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
@@ -9,28 +9,29 @@ import UpdateUser from './UpdateUser'
 import Images from './images.js';
 
 function App() {
-  return (
+/*   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
-        <Route path='/' element= {<Images/>} />
+        
       </Routes>
       </BrowserRouter>
     </div>
-  );
-  /*
+  ); */
+  
   return (
     <div className = "App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home/>}></Route>
+          <Route path='/' element= {<Images/>} />
+          <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
-          <Route path='/create' element={<CreateUser/>}></Route>
-          <Route path='/update/:id' element={<UpdateUser/>}></Route>          
+          <Route path='/admin/create' element={<CreateUser/>}></Route>
+          <Route path='/admin/update/:id' element={<UpdateUser/>}></Route>          
         </Routes>
       </BrowserRouter>
     </div>
-  );*/
+  );
 }
 
 export default App;

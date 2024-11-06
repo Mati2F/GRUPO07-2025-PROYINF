@@ -12,10 +12,10 @@ export default function CreateUser() {
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.post('http://localhost:3000/create', {rol, email, name, apellidos})
+        axios.post('http://localhost:3000/admin/create', {rol, email, name, apellidos})
         .then(res => {
             console.log(res);
-            navigate('/')
+            navigate('/admin')
         }).catch(err=> console.log(err))
     }
     return (

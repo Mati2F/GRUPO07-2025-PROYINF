@@ -14,7 +14,7 @@ const db = mysql.createConnection({
     database: "analisis"
 })
 
-app.get("/images", (req, res) => {
+app.get("/", (req, res) => {
     const sql = "SELECT * FROM imagenes";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
@@ -22,7 +22,7 @@ app.get("/images", (req, res) => {
     })
 })
 
-/* obtener por id
+//obtener por id
 app.get("/images/:id", (req, res) => {
     const sql = "SELECT * FROM imagenes WHERE id = ?";
     const id = req.params.id;
@@ -30,18 +30,30 @@ app.get("/images/:id", (req, res) => {
         if(err) return res.json("Error");
         return res.json(data)
     })
-})*/
+})
 
-/*
-app.get('/', (req, res) => {
+app.post('/login', (req, res) => {
+    const sql= "SELECT * FROM users WHERE Correo = ? AND Pwd = ?"
+
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if(err) return res.json("Login Failed" )
+        if(data.length > 0){
+            return res.json("Login successfully")
+        }else{
+            return res.json("no record "+ data + " "+ req.body.email + " " + req.body.password)
+        }
+    })
+})
+
+app.get('/admin', (req, res) => {
     const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
         return res.json(data);
     })
-})*/
+})
 
-app.post('/create', (req,res) => {
+app.post('/admin/create', (req,res) => {
     const sql = "INSERT INTO users(`Rol`, `Correo`, `Nombre`, `Apellidos`) VALUES (?)";
     const values = [
         req.body.rol,
@@ -54,22 +66,65 @@ app.post('/create', (req,res) => {
         return res.json(data);
     })
 })
-app.put('/update/:id', (req,res) => {
-    const sql = "UPDATE users SET Rol = ? Correo = ? Nombre = ? Apellidos = ? Pwd = ? where UserID = ?";
+app.put('/admin/update/:id', (req,res) => {
+    
+    let sql = "UPDATE users SET ";
     const values = [
         req.body.rol,
         req.body.email,
+        req.body.pwd,
         req.body.name,
         req.body.apellidos,
-        req.body.pwd,
     ]
+    let actualvalues = [];
+    let setClauses = [];
+
+    for(let i=0 ; i< values.length ; i++){
+        if(values[i]!==""){ // Rol = ? Correo = ? Nombre = ? Apellidos = ? Pwd = ? where UserID = ?
+            if(i==0){
+                setClauses.push("Rol = ?");
+                actualvalues.push(values[i])
+            }else if(i==1){
+                setClauses.push("Correo = ?");
+                actualvalues.push(values[i])
+            }else if(i==2){
+                setClauses.push("Pwd = ?");
+                actualvalues.push(values[i])
+            }else if(i==3){
+                setClauses.push("Nombre = ?");
+                actualvalues.push(values[i])
+            }else if(i==4){
+                setClauses.push("Apellidos = ?");
+                actualvalues.push(values[i])
+            }
+        }
+    }
+    sql += setClauses.join(", ")
+    sql += "WHERE UserID = ?"
+
     const id = req.params.id;
-    db.query(sql, [values, id], (err, data) =>{
-        if(err) return res.json("Error");
+    db.query(sql, [...actualvalues, id], (err, data) =>{
+        if(err) {
+            console.error("Error de actualización en la base de datos:", err); // Log para depuración
+            return res.status(500).json("Error al actualizar el usuario");
+        }
         return res.json(data);
     })
 })
 
+app.delete('/admin/:id', (req,res) => {
+    
+    let sql = "DELETE FROM users WHERE UserId = ? ";
+    
+    const id = req.params.id;
+    db.query(sql, [id], (err, data) =>{
+        if(err) {
+            console.error("Error de actualización en la base de datos:", err); // Log para depuración
+            return res.status(500).json("Error al eliminar el usuario");
+        }
+        return res.json(data);
+    })
+})
 
 /* 
 app.post('/login', async (req,res) => {
@@ -90,9 +145,8 @@ app.post('/login', async (req,res) => {
         res.send('login exitoso')
     }
 })
-
-
  */
+
 app.listen(port, () =>{
     console.log('listening')
 })

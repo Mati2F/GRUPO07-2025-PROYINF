@@ -2,16 +2,25 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
-function Home() {
+function Admin() {
     
     const [user, setUser] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/')
+        axios.get('http://localhost:3000/admin')
         .then(res=> setUser(res.data))
         .catch(err=> console.log(err))
     })
     
+
+    const handleDelete= async (id) =>{
+        try{
+            await axios.delete('http://localhost:3000/admin/'+id)
+            window.location.reload()
+        }catch(err){
+            console.log(err)
+        }
+    }
     return (
         <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
             <div className='w-50 bg-white rounded p-3'>
@@ -38,7 +47,7 @@ function Home() {
                                     <td>{data.Apellidos}</td>
                                     <td>
                                         <Link to={`update/${data.UserID}`} className='btn btn-primary'>Editar</Link>
-                                        <button className='btn btn-danger'>Eliminar</button>
+                                        <button className='btn btn-danger' onClick={e =>handleDelete(data.UserID)}>Eliminar</button>
                                     </td>
                                 </tr>
                             ))
@@ -50,4 +59,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Admin
