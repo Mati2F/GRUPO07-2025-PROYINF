@@ -7,9 +7,9 @@ function CreateNewsletters() {
   return (
     <div>
             <header>
-                <div className="header-container">
-                    <img src={"/minagri.png"} alt="Logo" className="logo" />
-                </div>
+                <a href = "/">
+                    <img src="/minagri.png" alt="Logo" className="logo" />
+                </a>
                 <nav>
                     <div className="logo"></div>
                     <ul className="nav-links">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import './vista_boletines.css'
 
 
 const port = process.env.PORT || 8081
@@ -70,23 +71,41 @@ function Boletines() {
                     </ul>
                 </aside>
 
-                <section className="boletines">
-                    <div className="search-bar">
-                        <input type="text" placeholder="Search" />
-                        <button>Recientes</button>
-                        <button>Más Vistos</button>
-                        <button>Rating</button>
-                    </div>
+                <section class="boletines">
+            <div class="search-bar">
+                <input type="text" placeholder="Search"/>
+                <button>Recientes</button>
+                <button>Más Vistos</button>
+                <button>Rating</button>
+            </div>
 
-                    <div className="boletin-container">
-                        {[1, 2, 3, 4, 5, 6].map(num => (
-                            <div className="boletin-item" key={num}>
-                                <img src="./BoletinFia.jpg" alt={`Boletin ${num}`} />
-                                <p>Boletin {num}</p>
-                            </div>
-                        ))}
-                    </div>
-                </section>
+			<div class="boletin-container">
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 1</p>
+				</div>
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 2</p>
+				</div>
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 3</p>
+				</div>
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 4</p>
+				</div>
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 5</p>
+				</div>
+				<div class="boletin-item">
+					<img src="/BoletinFia.jpg" alt="foto boletin"/>
+					<p>Boletín 6</p>
+				</div>
+            </div>
+        </section>
             </section>
 
             <footer>
