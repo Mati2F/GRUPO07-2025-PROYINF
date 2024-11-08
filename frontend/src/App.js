@@ -7,6 +7,9 @@ import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 
 import Images from './images.js';
+import CreateNewsletters from './CreateNewsletters.js'
+import SingleDraft from './SingleDraft.js'
+import AllDrafts from './AllDrafts.js'
 
 function App() {
 /*   return (
@@ -27,7 +30,10 @@ function App() {
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/admin/create' element={<CreateUser/>}></Route>
-          <Route path='/admin/update/:id' element={<UpdateUser/>}></Route>          
+          <Route path='/admin/update/:id' element={<UpdateUser/>}></Route>
+          <Route path="/admin/all-drafts" element={<AllDrafts />}/>
+          <Route path="/admin/create-newsletters" element={<CreateNewsletters />} />
+          <Route path="/admin/single-draft" element={<SingleDraft />} />          
         </Routes>
       </BrowserRouter>
     </div>
