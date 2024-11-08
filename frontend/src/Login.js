@@ -23,7 +23,7 @@ function Login() {
         <div>
             <header>
                 <div className="header-container">
-                    <img src={logo} alt="Logo" className="logo" />
+                    {/*<img src={logo} alt="Logo" className="logo" />*/}
                 </div>
                 <nav>
                     <div className="logo"></div>
@@ -40,7 +40,7 @@ function Login() {
             
             <section className="login-section">
                 <div className="login-container">
-                <h2>Login lol</h2>
+                <h2>Login</h2>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-3'>
                             <label htmlFor='email'>Email</label>
@@ -60,7 +60,7 @@ function Login() {
             <footer>
                 <div className="footer-container">
                     <div className="footer-left">
-                        <img src={minagriLogo} alt="MINAGRI logo" />
+                        {/*<img src={minagriLogo} alt="MINAGRI logo" />*/}
                     </div>
                     <div className="footer-right">
                         <div className="footer-section">

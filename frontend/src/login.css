@@ -115,7 +115,7 @@ button {
 footer {
     background-color: #d9d9d9;
     padding: 10px;
-    width: 98.7%;
+    width: 100%;
 }
 .footer-container {
     display: flex;
@@ -133,6 +133,7 @@ footer {
     justify-content: flex-end;
     gap: 300px; 
     padding-right: 100px;
+    margin-bottom: 50px;
 }
 
 .footer-section {
