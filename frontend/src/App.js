@@ -5,7 +5,7 @@ import Admin from './Admin'
 import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
-
+import Home from './Home.js'
 import Images from './images.js';
 
 function App() {
@@ -23,7 +23,8 @@ function App() {
     <div className = "App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element= {<Images/>} />
+          <Route path='/' element= {<Home/>} />
+          <Route path='/boletines' element= {<Images/>} />
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/admin/create' element={<CreateUser/>}></Route>
