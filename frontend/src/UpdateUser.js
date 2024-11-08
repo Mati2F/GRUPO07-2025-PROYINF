@@ -11,9 +11,11 @@ export default function UpdateUser() {
     const {id} = useParams()
     const navigate = useNavigate();
     
+    const port = process.env.PORT || 8081
+
     function handleSubmit(event){
         event.preventDefault();
-        axios.put(`http://localhost:3000/admin/update/`+id, {rol, email, pwd, name, apellidos})
+        axios.put(`http://localhost:${port}/admin/update/`+id, {rol, email, pwd, name, apellidos})
         .then(res => {
             console.log(res);
             navigate('/admin')

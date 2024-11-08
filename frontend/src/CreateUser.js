@@ -7,12 +7,13 @@ export default function CreateUser() {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [apellidos, setApellidos] = useState('')
-    
+    const port = process.env.PORT || 8081
+
     const navigate = useNavigate();
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.post('http://localhost:3000/admin/create', {rol, email, name, apellidos})
+        axios.post(`http://localhost:${port}/admin/create`, {rol, email, name, apellidos})
         .then(res => {
             console.log(res);
             navigate('/admin')

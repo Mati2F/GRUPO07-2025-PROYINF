@@ -7,6 +7,7 @@ import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 import Home from './Home.js'
 import Images from './images.js';
+import ViewBoletin from './ViewBoletin.js'
 
 function App() {
 /*   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element= {<Home/>} />
           <Route path='/boletines' element= {<Images/>} />
+          <Route path='/boletines/:id' element= {<ViewBoletin/>} />
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/admin/create' element={<CreateUser/>}></Route>

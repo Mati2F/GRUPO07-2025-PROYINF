@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
 import './login.css'
 function Login() {
+    const port = process.env.PORT || 8081
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -11,7 +12,7 @@ function Login() {
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.post('http://localhost:3000/login', {email, password})
+        axios.post(`http://localhost:${port}/login`, {email, password})
         .then(res => {
             console.log(res)
             //LOGIN EXITOSO DEBE REDIRECCIONAR A MAIN PAGE!!
