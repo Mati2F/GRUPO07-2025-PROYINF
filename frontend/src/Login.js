@@ -15,6 +15,14 @@ function Login() {
         axios.post(`http://localhost:${port}/login`, {email, password})
         .then(res => {
             console.log(res)
+            console.log(res);
+            if (res.data === "Login successfully") {
+                // Redirect to the main page on successful login
+                navigate('/main'); // Adjust the path as needed
+            } else {
+                // Handle error response (e.g., no record found)
+                alert("No record found. Please check your email and password.");
+            }
             //LOGIN EXITOSO DEBE REDIRECCIONAR A MAIN PAGE!!
         })
         .catch(err => console.log(err))

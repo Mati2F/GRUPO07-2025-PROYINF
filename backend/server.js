@@ -40,7 +40,7 @@ app.post('/login', (req, res) => {
         if(data.length > 0){
             return res.json("Login successfully")
         }else{
-            return res.json("no record "+ data + " "+ req.body.email + " " + req.body.password)
+            return res.json("No record")
         }
     })
 })
