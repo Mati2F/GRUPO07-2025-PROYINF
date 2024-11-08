@@ -6,11 +6,13 @@ function AllDrafts() {
     <div>
             <header>
                 <div className="header-container">
-                    <img src={"./minagri.png"} alt="Logo" className="logo" />
+                    <a href = "/">
+                        <img src="/minagri.png" alt="Logo" className="logo" />
+                    </a>
                 </div>
                 <nav>
                     <div className="logo"></div>
-                    <ul className="nav-as">
+                    <ul className="nav-links">
                         <li>VIGIFIA</li>
                         <li><a href="/admin/all-drafts">Borradores</a></li>
                         <li><a href="/admin/create-newsletters">Creación</a></li>
@@ -58,9 +60,6 @@ function AllDrafts() {
 
             <footer>
                 <div className="footer-container">
-                    <div className="footer-left">
-                        <img src="./minagri.png" alt="MINAGRI logo" />
-                    </div>
                     <div className="footer-right">
                         <div className="footer-section">
                             <h4>Sitios de interés</h4>

@@ -8,7 +8,7 @@ function CreateNewsletters() {
     <div>
             <header>
                 <div className="header-container">
-                    <img src={"./minagri"} alt="Logo" className="logo" />
+                    <img src={"/minagri.png"} alt="Logo" className="logo" />
                 </div>
                 <nav>
                     <div className="logo"></div>
@@ -38,9 +38,6 @@ function CreateNewsletters() {
             
             <footer>
                 <div className="footer-container">
-                    <div className="footer-left">
-                        <img src={"./minagri"} alt="MINAGRI logo" />
-                    </div>
                     <div className="footer-right">
                         <div className="footer-section">
                             <h4>Sitios de interés</h4>
@@ -56,9 +53,21 @@ function CreateNewsletters() {
                         <div className="footer-section">
                             <h4>Redes sociales</h4>
                             <p>
-                                <a href="#"><i className="fab fa-facebook"></i></a>
-                                <a href="#"><i className="fab fa-twitter"></i></a>
-                                <a href="#"><i className="fab fa-instagram"></i></a>
+                                <a href="https://twitter.com/FIA_Chile">
+                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                </a>
+                                <a href="https://www.instagram.com/fia_chile/">
+                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                </a>
+                                <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
+                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                </a>
+                                <a href="https://www.linkedin.com/company/fiachile">
+                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                </a>
+                                <a href="https://www.facebook.com/OpiaChile/">
+                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                </a>
                             </p>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ function Login() {
             console.log(res);
             if (res.data === "Login successfully") {
                 // Redirect to the main page on successful login
-                navigate('/main'); // Adjust the path as needed
+                navigate('/admin/all-drafts'); // Adjust the path as needed
             } else {
                 // Handle error response (e.g., no record found)
                 alert("No record found. Please check your email and password.");
@@ -32,15 +32,16 @@ function Login() {
         <div>
             <header>
                 <div className="header-container">
-                    <img src={"/logo.png"} alt="Logo" className="logo" />
+                    <a href = "/">
+                        <img src="/minagri.png" alt="Logo" className="logo" />
+                    </a>
                 </div>
                 <nav>
-                    <div className="logo"></div>
-                    <ul className="nav-links">
-                        <li>Boletines</li>
-                        <li>Solutions</li>
-                        <li>Contact</li>
-                        <li><button>Inicia sesión</button></li>
+                    <ul class="nav-menu">
+                        <li><a href="/Boletines">Boletines</a></li>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
                     </ul>
                 </nav>
             </header>
@@ -68,9 +69,6 @@ function Login() {
             {/* Footer compartido */}
             <footer>
                 <div className="footer-container">
-                    <div className="footer-left">
-                        <img src = "minagri.png" alt="MINAGRI logo" />
-                    </div>
                     <div className="footer-right">
                         <div className="footer-section">
                             <h4>Sitios de interés</h4>

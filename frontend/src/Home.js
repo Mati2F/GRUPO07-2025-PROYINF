@@ -11,10 +11,10 @@ function Home() {
                     <img src= "./logo.png" alt="Logo FIA" class="logo"/>
                     <nav>
                         <ul class="nav-menu">
-                            <li><a href="#">Boletines</a></li>
+                            <li><a href="/Boletines">Boletines</a></li>
                             <li><a href="#">Solutions</a></li>
                             <li><a href="#">Contact</a></li>
-                            <li><a href="#" class="login-button">Inicia sesión</a></li>
+                            <li><a href="/Login" class="login-button">Inicia sesión</a></li>
                         </ul>
                     </nav>
                 </div>
