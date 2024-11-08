@@ -68,6 +68,11 @@ button {
     padding: 20px;
 }
 
+.boletin{
+    width: 100px;
+    height: 100px;
+}
+
 .search-bar {
     display: flex;
     justify-content: space-between;

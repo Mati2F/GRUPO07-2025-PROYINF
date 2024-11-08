@@ -78,7 +78,6 @@ function Login() {
                         <div className="footer-section">
                             <h4>Redes sociales</h4>
                             <p>
-                                {/* Aquí puedes agregar los íconos de redes sociales */}
                                 <a href="https://twitter.com/FIA_Chile">
                                     <img className = "iconoX" src = "/iconos/X.png"></img>
                                 </a>

@@ -5,8 +5,14 @@ import Admin from './Admin'
 import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+import Home from './Home'
+import Boletines from './Boletines'
+import ViewBoletin from './ViewBoletin'
+import AllDrafts from './AllDrafts'
+import CreateNewsletters from './CreateNewsletters'
+import SingleDraft from './SingleDraft'
 
-import Images from './images.js';
+{/*import Images from './images.js';*/}
 
 function App() {
 

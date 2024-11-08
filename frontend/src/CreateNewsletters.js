@@ -1,6 +1,6 @@
 import React from 'react'
 import './creacion_boletines.css';
-import {Link} from 'react-router-dom'
+/*import {Link} from 'react-router-dom'*/
 import AllDrafts from './AllDrafts';
 
 function CreateNewsletters() {
@@ -8,15 +8,15 @@ function CreateNewsletters() {
     <div>
             <header>
                 <div className="header-container">
-                    <img src={logo} alt="Logo" className="logo" />
+                    <img src={"./minagri"} alt="Logo" className="logo" />
                 </div>
                 <nav>
                     <div className="logo"></div>
                     <ul className="nav-links">
                         <li>VIGIFIA</li>
-                        <li><Link to="/admin/all-drafts">Borradores</Link></li>
-                        <li><Link to="/admin/create-newsletters">Creación</Link></li>
-                        <li><Link to="/login">Iniciar sesión</Link></li>
+                        <li><a href="/admin/all-drafts">Borradores</a></li>
+                        <li><a href="/admin/create-newsletters">Creación</a></li>
+                        <li><a href="/login">Iniciar sesión</a></li>
                     </ul>
                 </nav>
             </header>
@@ -39,7 +39,7 @@ function CreateNewsletters() {
             <footer>
                 <div className="footer-container">
                     <div className="footer-left">
-                        <img src={minagriLogo} alt="MINAGRI logo" />
+                        <img src={"./minagri"} alt="MINAGRI logo" />
                     </div>
                     <div className="footer-right">
                         <div className="footer-section">
