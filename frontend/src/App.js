@@ -5,8 +5,12 @@ import Admin from './Admin'
 import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
-
-import Images from './images.js';
+import Boletines from './Boletines'
+import Home from './Home'
+import SingleDraft from './SingleDraft'
+import ViewBoletin from './ViewBoletin'
+import AllDrafts from './AllDrafts'
+import CreateNewsletters from './CreateNewsletters'
 
 function App() {
 
@@ -21,8 +25,8 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/admin/create' element={<CreateUser/>}></Route>
           <Route path='/admin/update/:id' element={<UpdateUser/>}></Route>
-          <Route path="/admin/all-drafts" element={<AllDrafts />}/>
           <Route path="/admin/create-newsletters" element={<CreateNewsletters />} />
+          <Route path="/admin/all-drafts" element={<AllDrafts />}/>
           <Route path="/admin/single-draft" element={<SingleDraft />} />          
         </Routes>
       </BrowserRouter>

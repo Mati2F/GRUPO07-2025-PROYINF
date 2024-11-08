@@ -2,7 +2,7 @@ import React from 'react'
 import './vista_boletines.css';
 
 function AllDrafts() {
-  return (
+    return (
     <div>
             <header>
                 <div className="header-container">
