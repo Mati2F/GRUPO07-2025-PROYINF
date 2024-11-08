@@ -24,7 +24,9 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
 * Para levantar el proyecto es necesario tener instalado [Node.js](https://nodejs.org/en/)
 
 1. Lo primero es clonar el proyecto subido a [Github](https://github.com/Mati2F/GRUPO02-2024-PROYINF).
-2. Dirigirse a la carpeta donde se encuentra el proyecto a través de la consola (el ultimo camino debe ser la carpeta "GRUPO02-2024-PROYINF")
-3. Ahora se debe dirigir a la carpeta "frontend" a través del comando "cd frontend".
-4. Una vez en la carpeta "frontend" se usa el comando npm run dev para levantar el proyecto (en caso de que no inicie la pagina, se usa el comando "npm i" para descargar paquetes que pueda que no se hayan instalado)
-5. Ahora la consola te dará una link de donde se puede revisar la pagina y en esta puede explorar a su gusto.
+2. Dirigirse a la carpeta donde se encuentra el proyecto a través de la terminal (el ultimo camino debe ser la carpeta "GRUPO02-2024-PROYINF")
+3. Ahora se debe dirigir a la carpeta "backend" a través del comando "cd backend".
+4. Una vez en la carpeta "backend" se usa el comando "npm start" para levantar la base de datos (en caso de que no funcione, intente "npm i" para actualizar los paquetes en caso de ser necesario).
+5. Luego, abra otra terminal y diríjase a la carpeta frontend con "cd frontend".
+6. Una vez en la carpeta "frontend", se usa el comando "npm start" para levantar la página.
+7. Ahora la consola abrirá automáticamente la pagina y en esta puede explorar a su gusto.
