@@ -17,8 +17,8 @@ header {
 }
 
 .logo{
-    width: 130px;
-    height: 60px;
+    width: 210px;
+    height: 70px;
 }
 
 nav {
@@ -117,15 +117,19 @@ footer {
     padding: 10px;
     width: 100%;
 }
+
 .footer-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 45px;
 }
 
 .footer-left img {
     width: 150px;
     height: auto;
+    margin-left: 20px;
+    margin-bottom: 50px;
 }
 
 .footer-right {
@@ -133,7 +137,6 @@ footer {
     justify-content: flex-end;
     gap: 300px; 
     padding-right: 100px;
-    margin-bottom: 50px;
 }
 
 .footer-section {
@@ -161,4 +164,34 @@ footer {
 
 .info, .contact, .social-media {
     width: 30%;
+}
+
+.iconoX{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+
+.iconoI{
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+}
+
+.iconoY{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+}
+
+.iconoL{
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+}
+
+.iconoF{
+    width: 45px;
+    height: 45px;
+    padding: 5px;
 }

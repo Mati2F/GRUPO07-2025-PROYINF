@@ -24,7 +24,7 @@ function Login() {
         <div>
             <header>
                 <div className="header-container">
-                    {/*<img src={logo} alt="Logo" className="logo" />*/}
+                    <img src={"/logo.png"} alt="Logo" className="logo" />
                 </div>
                 <nav>
                     <div className="logo"></div>
@@ -53,7 +53,7 @@ function Login() {
                             <input type='password' placeholder='Enter Password' className ='form-control' required
                             onChange={e=> setPassword(e.target.value)}></input>
                         </div>
-                        <button className='btn btn-success'>Login</button>
+                        <button className='btn btn-success'>Ingresar</button>
                     </form>
                 </div>
             </section>
@@ -61,7 +61,7 @@ function Login() {
             <footer>
                 <div className="footer-container">
                     <div className="footer-left">
-                        {/*<img src={minagriLogo} alt="MINAGRI logo" />*/}
+                        <img src = "minagri.png" alt="MINAGRI logo" />
                     </div>
                     <div className="footer-right">
                         <div className="footer-section">
@@ -79,9 +79,21 @@ function Login() {
                             <h4>Redes sociales</h4>
                             <p>
                                 {/* Aquí puedes agregar los íconos de redes sociales */}
-                                <a href="#"><i className="fab fa-facebook"></i></a>
-                                <a href="#"><i className="fab fa-twitter"></i></a>
-                                <a href="#"><i className="fab fa-instagram"></i></a>
+                                <a href="https://twitter.com/FIA_Chile">
+                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                </a>
+                                <a href="https://www.instagram.com/fia_chile/">
+                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                </a>
+                                <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
+                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                </a>
+                                <a href="https://www.linkedin.com/company/fiachile">
+                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                </a>
+                                <a href="https://www.facebook.com/OpiaChile/">
+                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                </a>
                             </p>
                         </div>
                     </div>
