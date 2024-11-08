@@ -3,11 +3,12 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 function Admin() {
-    
+    const port = process.env.PORT || 8081
+
     const [user, setUser] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/admin')
+        axios.get(`http://localhost:${port}/admin`)
         .then(res=> setUser(res.data))
         .catch(err=> console.log(err))
     })
@@ -15,7 +16,7 @@ function Admin() {
 
     const handleDelete= async (id) =>{
         try{
-            await axios.delete('http://localhost:3000/admin/'+id)
+            await axios.delete(`http://localhost:${port}/admin/`+id)
             window.location.reload()
         }catch(err){
             console.log(err)

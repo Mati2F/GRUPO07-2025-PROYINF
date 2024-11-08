@@ -1,6 +1,6 @@
 const express = require("express")
 const cors = require("cors")
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8081
 const mysql = require("mysql")
 
 const app = express()
@@ -126,27 +126,7 @@ app.delete('/admin/:id', (req,res) => {
     })
 })
 
-/* 
-app.post('/login', async (req,res) => {
-    const sql = 'SELECT * FROM users WHERE user = ? AND password = ?'
-    const values = [
-        req.body.user,
-        req.body.pass
-    ]
-    if (user && pass){
-        db.query(sql, [values], (error, results) => {
-            if(results.lenght == 0 ){
-                return res.json('USUARIO Y/O PASSWORD INCORRECTA');
-            }else{
-                return res.json(data);
-            }
-        })
-    }else{
-        res.send('login exitoso')
-    }
-})
- */
 
 app.listen(port, () =>{
     console.log('listening')
-})
+}) 
