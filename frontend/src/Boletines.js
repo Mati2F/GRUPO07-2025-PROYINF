@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const port = process.env.PORT || 8081
 
-function Images() {
+function Boletines() {
   const [images, setImages] = useState([])
   const [Taimages, setTaImages] = useState([])
   const [resImages, setResImages] = useState("")
@@ -62,4 +62,4 @@ function Images() {
   )
 }
 
-export default Images
+export default Boletines

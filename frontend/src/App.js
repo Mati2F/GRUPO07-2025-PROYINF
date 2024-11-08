@@ -6,26 +6,17 @@ import Login from './Login'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 import Home from './Home.js'
-import Images from './images.js';
+import Boletines from './Boletines.js';
 import ViewBoletin from './ViewBoletin.js'
 
 function App() {
-/*   return (
-    <div className="App">
-      <BrowserRouter>
-      <Routes>
-        
-      </Routes>
-      </BrowserRouter>
-    </div>
-  ); */
-  
+
   return (
     <div className = "App">
       <BrowserRouter>
         <Routes>
           <Route path='/' element= {<Home/>} />
-          <Route path='/boletines' element= {<Images/>} />
+          <Route path='/boletines' element= {<Boletines/>} />
           <Route path='/boletines/:id' element= {<ViewBoletin/>} />
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
