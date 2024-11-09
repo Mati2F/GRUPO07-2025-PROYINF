@@ -22,11 +22,14 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
 
 ## Información para levantar el proyecto:
 * Para levantar el proyecto es necesario tener instalado [Node.js](https://nodejs.org/en/)
+* Para levantar la base de datos es necesario tener instalado [XAMPP](https://www.apachefriends.org/es/index.html)
+* Existe una carpeta llamada BaseDeDatos donde se encuentra la base de datos usada. Es necesario importarla en el phpMyAdmin en una Base de Datos llamada "analisis".
 
 1. Lo primero es clonar el proyecto subido a [Github](https://github.com/Mati2F/GRUPO02-2024-PROYINF).
-2. Dirigirse a la carpeta donde se encuentra el proyecto a través de la terminal (el ultimo camino debe ser la carpeta "GRUPO02-2024-PROYINF")
-3. Ahora se debe dirigir a la carpeta "backend" a través del comando "cd backend".
-4. Una vez en la carpeta "backend" se usa el comando "npm start" para levantar la base de datos (en caso de que no funcione, intente "npm i" para actualizar los paquetes en caso de ser necesario).
-5. Luego, abra otra terminal y diríjase a la carpeta frontend con "cd frontend".
-6. Una vez en la carpeta "frontend", se usa el comando "npm start" para levantar la página.
-7. Ahora la consola abrirá automáticamente la pagina y en esta puede explorar a su gusto.
+2. Ahora hay que abrir el XAMPP y inicar tanto Apache como MySql.
+3. Dirigirse a la carpeta donde se encuentra el proyecto a través de la terminal (el ultimo camino debe ser la carpeta "GRUPO02-2024-PROYINF")
+4. Ahora se debe dirigir a la carpeta "backend" a través del comando "cd backend".
+5. Una vez en la carpeta "backend" se usa el comando "npm start" para levantar la base de datos (en caso de que no funcione, intente "npm i" para actualizar los paquetes en caso de ser necesario).
+6. Luego, abra otra terminal y diríjase a la carpeta frontend con "cd frontend".
+7. Una vez en la carpeta "frontend", se usa el comando "npm start" para levantar la página.
+8. Ahora la consola abrirá automáticamente la pagina y en esta puede explorar a su gusto.
