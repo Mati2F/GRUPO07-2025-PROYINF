@@ -15,6 +15,7 @@ function Home() {
                             <li><a href="#">Solutions</a></li>
                             <li><a href="#">Contact</a></li>
                             <li><a href="/Login" class="login-button">Inicia sesión</a></li>
+                            <li><a href="/admin" class="login-button">Ir a Modo Administrador</a></li>
                         </ul>
                     </nav>
                 </div>

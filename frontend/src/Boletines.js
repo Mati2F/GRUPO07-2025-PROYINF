@@ -44,7 +44,7 @@ function Boletines() {
                 </div>
                 <nav>
                     <div className="logo"></div>
-                    <ul class="nav-menu">
+                    <ul className="nav-menu">
                         <li><a href="/Boletines">Boletines</a></li>
                         <li><a href="#">Solutions</a></li>
                         <li><a href="#">Contact</a></li>
@@ -71,36 +71,36 @@ function Boletines() {
                     </ul>
                 </aside>
 
-                <section class="boletines">
-            <div class="search-bar">
+                <section className="boletines">
+            <div className="search-bar">
                 <input type="text" placeholder="Search"/>
                 <button>Recientes</button>
                 <button>Más Vistos</button>
                 <button>Rating</button>
             </div>
 
-			<div class="boletin-container">
-				<div class="boletin-item">
+			<div className="boletin-container">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 1</p>
 				</div>
-				<div class="boletin-item">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 2</p>
 				</div>
-				<div class="boletin-item">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 3</p>
 				</div>
-				<div class="boletin-item">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 4</p>
 				</div>
-				<div class="boletin-item">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 5</p>
 				</div>
-				<div class="boletin-item">
+				<div className="boletin-item">
 					<img src="/BoletinFia.jpg" alt="foto boletin"/>
 					<p>Boletín 6</p>
 				</div>
