@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2024 a las 00:27:09
+-- Tiempo de generación: 09-11-2024 a las 03:35:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,8 +38,39 @@ CREATE TABLE `imagenes` (
 --
 
 INSERT INTO `imagenes` (`id`, `url`, `categorias`) VALUES
-(1, 'AB', 'incendio'),
-(2, 'zzz', NULL);
+(3, 'http://exam', 'Lluvia'),
+(4, 'http://exam', 'Sequia'),
+(5, 'http://exam', 'Incendio'),
+(6, 'http://exam', 'Alimentos'),
+(7, 'http://exam', 'Apicultura'),
+(8, 'http://exam', 'Berries'),
+(9, 'http://exam', 'Bioenergía'),
+(10, 'http://exam', 'Ovinos'),
+(11, 'http://exam', 'TIC'),
+(12, 'http://exam', 'Lluvia'),
+(13, 'http://exam', 'Sequia'),
+(14, 'http://exam', 'Incendio'),
+(15, 'http://exam', 'Alimentos'),
+(16, 'http://exam', 'Apicultura'),
+(17, 'http://exam', 'Berries'),
+(18, 'http://exam', 'Bioenergía'),
+(19, 'http://exam', 'Ovinos'),
+(20, 'http://exam', 'TIC'),
+(21, 'http://exam', 'Lluvia'),
+(22, 'http://exam', 'Sequia'),
+(23, 'http://exam', 'Incendio'),
+(24, 'http://exam', 'Alimentos'),
+(25, 'http://exam', 'Apicultura'),
+(26, 'http://exam', 'Berries'),
+(27, 'http://exam', 'Bioenergía'),
+(28, 'http://exam', 'Ovinos'),
+(29, 'http://exam', 'TIC'),
+(30, 'http://exam', 'Lluvia'),
+(31, 'http://exam', 'Sequia'),
+(32, 'http://exam', 'Incendio'),
+(33, 'http://exam', 'Alimentos'),
+(34, 'http://exam', 'Apicultura'),
+(35, 'http://exam', 'Berries');
 
 -- --------------------------------------------------------
 
@@ -93,7 +124,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
