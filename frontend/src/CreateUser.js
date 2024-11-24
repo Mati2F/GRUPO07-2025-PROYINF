@@ -16,8 +16,13 @@ export default function CreateUser() {
         event.preventDefault();
         axios.post(`http://localhost:${port}/admin/create`, {rol, email, name, apellidos})
         .then(res => {
-            console.log(res);
-            navigate('/admin')
+            if(res.data.Status === "Success"){
+                //console.log(res);
+                navigate('/admin')
+            } else{
+                alert("Error creando usuario")
+            }
+            
         }).catch(err=> console.log(err))
     }
     return (

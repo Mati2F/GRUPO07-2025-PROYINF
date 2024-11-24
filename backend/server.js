@@ -2,10 +2,17 @@ const express = require("express")
 const cors = require("cors")
 const port = process.env.PORT || 8081
 const mysql = require("mysql")
+const jwt = require("jsonwebtoken")
+const cookieParser = require("cookie-parser")
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["POST","GET"],
+    credentials: true
+}))
+app.use(cookieParser())
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -21,6 +28,26 @@ app.get("/", (req, res) => {
         return res.json(data)
     })
 })
+
+const verifyUser = (req,res,next) => {
+    const token = req.cookies.token;
+    if(!token){ //si no existe la cookie del login
+        return res.json({Error: "Not loged in :("})
+    }else {
+        jwt.verify(token, "jwt-secret-key", (err, decoded)=> {
+            if(err){
+                return res.json({Error: "Token not right"})
+            } else {
+                req.name = decoded.name
+                next();
+            }
+        })
+    }
+}
+app.get("/admin/all-drafts",verifyUser, (req, res) => {
+    return res.json({Status: "Success", name: req.name})
+    })
+
 
 //obtener por id
 app.get("/images/:id", (req, res) => {
@@ -38,11 +65,19 @@ app.post('/login', (req, res) => {
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if(err) return res.json("Login Failed" )
         if(data.length > 0){
+            const name = data[0].name
+            const token = jwt.sign({name},"jwt-secret-key", {expiresIn: '1d'}); //Generate token\
+            res.cookie('token',token)
             return res.json("Login successfully")
         }else{
             return res.json("No record")
         }
     })
+})
+
+app.get('/logout', (req, res)=>{
+    res.clearCookie('token')
+    return res.json({Status: "Success"});
 })
 
 app.get('/admin', (req, res) => {
@@ -62,8 +97,8 @@ app.post('/admin/create', (req,res) => {
         req.body.apellidos
     ]
     db.query(sql, [values], (err, data) =>{
-        if(err) return res.json("Error");
-        return res.json(data);
+        if(err) return res.json({Error: "Inserting data error in server"});
+        return res.json({Status: "Success"});
     })
 })
 app.put('/admin/update/:id', (req,res) => {

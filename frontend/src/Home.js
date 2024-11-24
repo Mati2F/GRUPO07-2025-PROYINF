@@ -1,7 +1,22 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './inicio.css'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const [auth, setAuth] = useState(false);
+    axios.defaults.withCredentials = true;
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
+        })
+    })
     
     return (
         <body>
@@ -14,8 +29,12 @@ function Home() {
                             <li><a href="/Boletines">Boletines</a></li>
                             <li><a href="#">Solutions</a></li>
                             <li><a href="#">Contact</a></li>
+                            {auth ? 
+                            <li><a href="/admin/all-drafts" className="login-button">Borradores</a></li> 
+                            : 
                             <li><a href="/Login" class="login-button">Inicia sesión</a></li>
-                            <li><a href="/admin" class="login-button">Ir a Modo Administrador</a></li>
+                            }
+                            
                         </ul>
                     </nav>
                 </div>

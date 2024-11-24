@@ -9,6 +9,7 @@ function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+    axios.defaults.withCredentials=true;
 
     function handleSubmit(event){
         event.preventDefault();
@@ -17,13 +18,10 @@ function Login() {
             console.log(res)
             console.log(res);
             if (res.data === "Login successfully") {
-                // Redirect to the main page on successful login
-                navigate('/admin/all-drafts'); // Adjust the path as needed
+                navigate('/admin/all-drafts');
             } else {
-                // Handle error response (e.g., no record found)
                 alert("No record found. Please check your email and password.");
             }
-            //LOGIN EXITOSO DEBE REDIRECCIONAR A MAIN PAGE!!
         })
         .catch(err => console.log(err))
     }
@@ -41,7 +39,6 @@ function Login() {
                         <li><a href="/Boletines">Boletines</a></li>
                         <li><a href="#">Solutions</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
                     </ul>
                 </nav>
             </header>

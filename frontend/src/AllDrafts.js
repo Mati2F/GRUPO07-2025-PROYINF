@@ -1,7 +1,37 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './vista_boletines.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function AllDrafts() {
+    const [auth, setAuth] = useState(false);
+    const [message, setMessage] = useState('');
+    const [name, setName] = useState('');
+    const navigate = useNavigate();
+
+    axios.defaults.withCredentials = true;
+    
+    const handleLogout = () => {
+        axios.get('http://localhost:8081/logout')
+        .then(res => {
+            //window.location.reload();
+            navigate('/')
+        })
+        .catch(err=> console.log(err))
+    }
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+                setName(res.data.name)
+            } else {
+                setAuth(false)
+                setMessage(res.data.error)
+            }
+        })
+    })
     return (
     <div>
             <header>
@@ -13,10 +43,20 @@ function AllDrafts() {
                 <nav>
                     <div className="logo"></div>
                     <ul className="nav-links">
+                        
+                        {auth ? 
+                        <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li> 
+                        : 
+                        <li>Hola, {name} </li> 
+                        }
                         <li>VIGIFIA</li>
                         <li><a href="/admin/all-drafts">Borradores</a></li>
                         <li><a href="/admin/create-newsletters">Creación</a></li>
-                        <li><a href="/login">Iniciar sesión</a></li>
+                        <li className="nav-item">
+                            <button onClick={handleLogout}
+                            className="nav-link-outline-0 border-0 bg-red text-prima"  class="login-button"
+                            href="/">Cerrar sesion</button></li>
+                            
                     </ul>
                 </nav>
             </header>

@@ -2,13 +2,26 @@ import React from 'react'
 import './creacion_boletines.css';
 /*import {Link} from 'react-router-dom'*/
 import AllDrafts from './AllDrafts';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function CreateNewsletters() {
-  return (
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        axios.get('http://localhost:8081/logout')
+        .then(res => {
+            //window.location.reload();
+            navigate('/')
+        })
+        .catch(err=> console.log(err))
+    }
+    return (
     <div>
             <header>
                 <a href = "/">
                     <img src="/minagri.png" alt="Logo" className="logo" />
+                    <Link to='/admin/all-drafts'>Volver</Link>
                 </a>
                 <nav>
                     <div className="logo"></div>
@@ -16,7 +29,10 @@ function CreateNewsletters() {
                         <li>VIGIFIA</li>
                         <li><a href="/admin/all-drafts">Borradores</a></li>
                         <li><a href="/admin/create-newsletters">Creación</a></li>
-                        <li><a href="/login">Iniciar sesión</a></li>
+                        <li className="nav-item">
+                            <button onClick={handleLogout}
+                            className="nav-link-outline-0 border-0 bg-red text-prima"  class="login-button"
+                            href="/">Cerrar sesion</button></li>
                     </ul>
                 </nav>
             </header>

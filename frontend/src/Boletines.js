@@ -6,35 +6,35 @@ import './vista_boletines.css'
 const port = process.env.PORT || 8081
 
 function Boletines() {
-  const [images, setImages] = useState([])
-  const [Taimages, setTaImages] = useState([])
-  const [resImages, setResImages] = useState("")
+    const [images, setImages] = useState([])
+    const [Taimages, setTaImages] = useState([])
+    const [resImages, setResImages] = useState("")
 
-  const peticionGet = async() => {
+    const peticionGet = async() => {
     await axios.get(`http://localhost:${port}`)
-      .then(res =>{
+        .then(res =>{
         setImages(res.data);
         setTaImages(res.data);
-      }).catch(err => console.log(err));
-  }
+        }).catch(err => console.log(err));
+    }
 
-  const handleChange = e => {
-    setResImages(e.target.value);
-    filtrar(e.target.value);
-  }
+    const handleChange = e => {
+        setResImages(e.target.value);
+        filtrar(e.target.value);
+    }
 
-  useEffect(() => {
-    peticionGet();
-  }, [])
+    useEffect(() => {
+        peticionGet();
+    }, [])
 
-  const filtrar = (filtro) => {
-    var resultado = Taimages.filter((elemento) =>{
-      if(elemento.categorias.toString().toLowerCase().includes(filtro.toLowerCase())) {return elemento;}
-    });
-    setImages(resultado);
-  }
+    const filtrar = (filtro) => {
+        var resultado = Taimages.filter((elemento) =>{
+        if(elemento.categorias.toString().toLowerCase().includes(filtro.toLowerCase())) {return elemento;}
+        });
+        setImages(resultado);
+    }
 
-  return (
+    return (
     <div>
             <header>
                 <div className="header-container">
@@ -146,7 +146,7 @@ function Boletines() {
                 </div>
             </footer>
         </div>
-  )
+    )
 }
 
 export default Boletines
