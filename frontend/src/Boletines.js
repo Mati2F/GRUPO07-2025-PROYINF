@@ -30,6 +30,7 @@ function Boletines() {
     const filtrar = (filtro) => {
         var resultado = Taimages.filter((elemento) =>{
         if(elemento.categorias.toString().toLowerCase().includes(filtro.toLowerCase())) {return elemento;}
+        return null;
         });
         setImages(resultado);
     }
@@ -46,8 +47,8 @@ function Boletines() {
                     <div className="logo"></div>
                     <ul className="nav-menu">
                         <li><a href="/Boletines">Boletines</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/">Solutions</a></li>
+                        <li><a href="/">Contact</a></li>
                         <li><a href="/Login" class="login-button">Inicia sesión</a></li>
                     </ul>
                 </nav>
@@ -73,37 +74,36 @@ function Boletines() {
 
                 <section className="boletines">
             <div className="search-bar">
-                <input type="text" placeholder="Search"/>
+                <input 
+                    className="form-control inputBuscar"
+                    value={resImages}
+                    placeholder="Busqueda de categorias"
+                    onChange={handleChange}
+                />
                 <button>Recientes</button>
                 <button>Más Vistos</button>
                 <button>Rating</button>
             </div>
 
 			<div className="boletin-container">
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 1</p>
-				</div>
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 2</p>
-				</div>
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 3</p>
-				</div>
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 4</p>
-				</div>
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 5</p>
-				</div>
-				<div className="boletin-item">
-					<img src="/BoletinFia.jpg" alt="foto boletin"/>
-					<p>Boletín 6</p>
-				</div>
+                <table className="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>url</th>
+                        <th>categorias</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {images &&
+                    images.map((ima) => (
+                        <tr key={ima.id}>
+                            <td>{ima.url}</td>
+                            <td>{ima.categorias}</td>
+                        </tr>
+                    ))}
+                </tbody>
+                </table>
             </div>
         </section>
             </section>
@@ -126,19 +126,19 @@ function Boletines() {
                             <h4>Redes sociales</h4>
                             <p>
                                 <a href="https://twitter.com/FIA_Chile">
-                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                    <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                                 </a>
                                 <a href="https://www.instagram.com/fia_chile/">
-                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                    <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                                 </a>
                                 <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                    <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                                 </a>
                                 <a href="https://www.linkedin.com/company/fiachile">
-                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                    <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                                 </a>
                                 <a href="https://www.facebook.com/OpiaChile/">
-                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                    <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                                 </a>
                             </p>
                         </div>
