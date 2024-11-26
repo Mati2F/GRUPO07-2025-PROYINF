@@ -4,12 +4,14 @@ const port = process.env.PORT || 8081
 const mysql = require("mysql")
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
+const nodemailer = require('nodemailer')
 
 const app = express()
-app.use(express.json())
+app.use(express.json({limit: "25mb"}))
+app.use(express.urlencoded({limit:"25mb"}))
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["POST","GET"],
+    methods: ["POST","GET",'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }))
 app.use(cookieParser())
@@ -129,17 +131,8 @@ app.post('/admin/create', (req,res) => {
         return res.json({Status: "Success"});
     })
 })
-app.get("/admin/create", (req,res)=>{
-    sendEmail()
-        .then((response)=> res.send(response.message))
-        .catch((error)=> res.status(500).send(error.message))
-    })
 
-app.post("/send_email",(req,res)=>{
-    sendEmail(req.body)
-        .then((response)=> res.send(response.message))
-        .catch((error)=> res.status(500).send(error.message))
-})
+
 //Email con contrase;a
 function sendEmail(receiver, password){
     return new Promise((resolve,reject)=>{
@@ -165,6 +158,11 @@ function sendEmail(receiver, password){
         })
     })
 }
+app.post("/send_email",(req,res)=>{
+    sendEmail(req.body)
+        .then((response)=> res.send(response.message))
+        .catch((error)=> res.status(500).send(error.message))
+})
 
 app.put('/admin/update/:id', (req,res) => {
     
