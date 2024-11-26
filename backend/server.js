@@ -36,6 +36,27 @@ app.get("/", (req, res) => {
         return res.json(data)
     })
 })
+
+app.get("/categorias", (req, res) => {
+    const sql = "SELECT categorias FROM imagenes";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        const elementMap = new Map()
+        const categorias = []
+        for(let categoria in data){
+            if(elementMap.has(data[categoria].categorias)) elementMap.set(data[categoria].categorias, elementMap.get(data[categoria].categorias) + 1);
+            else elementMap.set(data[categoria].categorias, 1);
+        }
+        elementMap.forEach((count, element) =>{
+            if(count > 1) {
+                categorias.push(element);
+            }
+        })
+        return res.json(categorias)
+    })
+})
+
+
 //obtener por id
 app.get("/images/:id", (req, res) => {
     const sql = "SELECT * FROM imagenes WHERE id = ?";
