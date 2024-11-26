@@ -23,13 +23,16 @@ export default function CreateUser() {
     }
     const pass = generarContrasena(16);
 
+
     function handleSubmit(event){
         event.preventDefault();
         axios.post(`http://localhost:${port}/admin/create`, {rol, email, pass, name, apellidos})
         .then(res => {
             if(res.data.Status === "Success"){
-                //console.log(res);
-                navigate('/admin')
+                axios.post(`http:/localhost:${port}`, {email, pass})
+                .then(()=> navigate('/admin'))
+                .catch(()=> alert("Oops, ocurrio un problema enviando la clave"))
+                
             } else{
                 alert("Error creando usuario")
             }

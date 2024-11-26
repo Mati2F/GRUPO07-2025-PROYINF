@@ -4,15 +4,21 @@ const port = process.env.PORT || 8081
 const mysql = require("mysql")
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
+const nodemailer = require('nodemailer')
 
 const app = express()
-app.use(express.json())
+app.use(express.json({limit: "25mb"}))
+app.use(express.urlencoded({limit:"25mb"}))
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["POST","GET"],
     credentials: true
 }))
 app.use(cookieParser())
+app.use((req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin","*")
+    next()
+})
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -20,6 +26,7 @@ const db = mysql.createConnection({
     password: "",
     database: "analisis"
 })
+
 
 //Show boletines
 app.get("/", (req, res) => {
@@ -106,6 +113,43 @@ app.post('/admin/create', (req,res) => {
         return res.json({Status: "Success"});
     })
 })
+app.get("/admin/create", (req,res)=>{
+    sendEmail()
+        .then((response)=> res.send(response.message))
+        .catch((error)=> res.status(500).send(error.message))
+    })
+
+app.post("/send_email",(req,res)=>{
+    sendEmail(req.body)
+        .then((response)=> res.send(response.message))
+        .catch((error)=> res.status(500).send(error.message))
+})
+//Email con contrase;a
+function sendEmail(receiver, password){
+    return new Promise((resolve,reject)=>{
+        var transporter = nodemailer.createTransport({
+            service:'gmail',
+            auth:{
+                user:'proyectovigifiausm@gmail.com',
+                pass:'Analisis2024grupo2'
+            }
+        })
+        const mail_configs ={
+            from:'proyectovigifiausm@gmail.com',
+            to:receiver,
+            subject:'Tu contrasena para Vigifia',
+            text: 'Inicia sesion en vigifia con tu este correo y la siguiente contrasena '+password
+        }
+        transporter.sendMail(mail_configs, function(error, info){
+            if(error){
+                console.log(error);
+                return reject({message: 'Error with sending mail'})
+            }
+            return resolve({message:"Email sent successfully"})
+        })
+    })
+}
+
 app.put('/admin/update/:id', (req,res) => {
     
     let sql = "UPDATE users SET ";

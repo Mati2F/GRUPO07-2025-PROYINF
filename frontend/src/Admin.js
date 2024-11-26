@@ -9,22 +9,20 @@ function Admin() {
     const [auth, setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
-    useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
-            }
-        })
-    })
     useEffect(() => {
         axios.get(`http://localhost:${port}/admin`)
-        .then(res=> setUser(res.data))
-        .catch(err=> console.log(err))
+            .then(res=> setUser(res.data))
+            .catch(err=> console.log(err))
+            
+        axios.get('http://localhost:8081/admin/all-drafts')
+            .then(res=> {
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+        })
     })
-    
 
     const handleDelete= async (id) =>{
         try{
