@@ -27,16 +27,16 @@ function Boletines() {
         }).catch(err => console.log(err));
     }
 
-    const handleChange = e => {
-        setResImages(e.target.value);
-        filtrar(e.target.value);
-    }
-
     useEffect(() => {
         peticionGet();
         categoryGet();
         
     }, [])
+
+    const handleChange = e => {
+        setResImages(e.target.value);
+        filtrar(e.target.value);
+    }
 
     const filtrar = (filtro) => {
         var resultado = Taimages.filter((elemento) =>{
@@ -47,16 +47,29 @@ function Boletines() {
     }
 
     const handleChangeCheckBox = e => {
-        let update = Taimages.filter((fp) => {
+        var update = Taimages.filter((fp) => {
             if(fp.categorias.toString().toLowerCase().includes(e.target.value.toLowerCase())) {return fp;}
             return null;
-        })
+        });
         if(e.target.checked){
-            setFilter(filter.concat(update));
-            setImages(filter)
+            let filtro = filter.concat(update)
+            filtro.sort(function (a, b) {
+                if(a.id > b.id) return 1
+                if(a.id < b.id) return -1
+                return 0
+            })
+            console.log(filtro);
+            setFilter(filtro);
+            setImages(filtro);
         }
         else{
-
+            const duplicado = []
+            filter.forEach((element) => {
+                if(element.categorias !== e.target.value) duplicado.push(element);
+            })
+            setFilter(duplicado);
+            setImages(duplicado);
+            if(duplicado.length === 0) setImages(Taimages)
         }
         /*
         if(e.target.checked){
