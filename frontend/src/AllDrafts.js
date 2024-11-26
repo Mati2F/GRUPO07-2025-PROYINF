@@ -8,6 +8,7 @@ function AllDrafts() {
     const [auth, setAuth] = useState(false);
     const [message, setMessage] = useState('');
     const [name, setName] = useState('');
+    const [role, setRole] = useState(false);
     const navigate = useNavigate();
 
     axios.defaults.withCredentials = true;
@@ -26,77 +27,92 @@ function AllDrafts() {
             if(res.data.Status === "Success"){
                 setAuth(true)
                 setName(res.data.name)
+                if(res.data.role === 1){
+                    setRole(true) 
+                }
+                
             } else {
                 setAuth(false)
                 setMessage(res.data.error)
             }
         })
     })
+    const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
+    }
     return (
+        
     <div>
-            <header>
-                <div className="header-container">
-                    <a href = "/">
-                        <img src="/minagri.png" alt="Logo" className="logo" />
-                    </a>
-                </div>
-                <nav>
-                    <div className="logo"></div>
-                    <ul className="nav-links">
-                        
-                        {auth ? 
-                        <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li> 
-                        : 
-                        <li>Hola, {name} </li> 
-                        }
-                        <li>VIGIFIA</li>
-                        <li><a href="/admin/all-drafts">Borradores</a></li>
-                        <li><a href="/admin/create-newsletters">Creación</a></li>
-                        <li className="nav-item">
-                            <button onClick={handleLogout}
-                            className="nav-link-outline-0 border-0 bg-red text-prima"  class="login-button"
-                            href="/">Cerrar sesion</button></li>
-                            
-                    </ul>
-                </nav>
-            </header>
-
-            <section className="main-content">
-                <aside className="filters">
-                    <h3>Boletines</h3>
-                    <ul>
-                        <li>Alimentos <input type="checkbox" /></li>
-                        <li>Berries <input type="checkbox" /></li>
-                        <li>Cambio climatico <input type="checkbox" /></li>
-                        <li>Apicultura <input type="checkbox" /></li>
-                        <li>Bionergia <input type="checkbox" /></li>
-                        <li>Catastrofes <input type="checkbox" /></li>
-                        <li>Clima calido <input type="checkbox" /></li>
-                        <li>Clima templado <input type="checkbox" /></li>
-                        <li>Clima helado <input type="checkbox" /></li>
-                        <li>Ovinos <input type="checkbox" /></li>
-                        <li>TIC's <input type="checkbox" /></li>
-                    </ul>
-                </aside>
-
-                <section className="borradores">
-                    <div className="search-bar">
-                        <input type="text" placeholder="Search" />
-                        <button>Recientes</button>
-                        <button>Más Vistos</button>
-                        <button>Rating</button>
+        <header>
+                    <div className="header-container">
+                        <a href="/">
+                            <img src="/minagri.png" alt="Logo" className="logo" />
+                        </a>
                     </div>
+                    <nav>
+                        <div className="logo"></div>
+                        <ul className="nav-links">
 
-                    <div className="borrador-container">
-                        {[1, 2, 3, 4, 5, 6].map(num => (
-                            <div className="borrador-item" key={num}>
-                                <img className = "boletin" src="/BoletinFia.jpg" alt={`Borrador ${num}`} />
-                                <p>Borrador {num}</p>
+                            {role ?
+                                <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li>
+                                :
+                                <li>Hola {name}! </li>}
+                            <li>VIGIFIA</li>
+                            <li><a href="/admin/all-drafts">Borradores</a></li>
+                            <li><a href="/admin/create-newsletters">Creación</a></li>
+                            <li className="nav-item">
+                                <button onClick={handleLogout}
+                                    className="nav-link-outline-0 border-0 bg-red text-prima" class="login-button"
+                                    href="/">Cerrar sesion</button></li>
+
+                        </ul>
+                    </nav>
+                </header><section className="main-content">
+                        <aside className="filters">
+                            <h3>Boletines</h3>
+                            <ul>
+                                <li>Alimentos <input type="checkbox" /></li>
+                                <li>Berries <input type="checkbox" /></li>
+                                <li>Cambio climatico <input type="checkbox" /></li>
+                                <li>Apicultura <input type="checkbox" /></li>
+                                <li>Bionergia <input type="checkbox" /></li>
+                                <li>Catastrofes <input type="checkbox" /></li>
+                                <li>Clima calido <input type="checkbox" /></li>
+                                <li>Clima templado <input type="checkbox" /></li>
+                                <li>Clima helado <input type="checkbox" /></li>
+                                <li>Ovinos <input type="checkbox" /></li>
+                                <li>TIC's <input type="checkbox" /></li>
+                            </ul>
+                        </aside>
+
+                        <section className="borradores">
+                            <div className="search-bar">
+                                <input type="text" placeholder="Search" />
+                                <button>Recientes</button>
+                                <button>Más Vistos</button>
+                                <button>Rating</button>
                             </div>
-                        ))}
-                    </div>
-                </section>
-            </section>
+
+                            <div className="borrador-container">
+                                {[1, 2, 3, 4, 5, 6].map(num => (
+                                    <div className="borrador-item" key={num}>
+                                        <img className="boletin" src="/BoletinFia.jpg" alt={`Borrador ${num}`} />
+                                        <p>Borrador {num}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </section>
+            
 
             <footer>
                 <div className="footer-container">
@@ -136,7 +152,7 @@ function AllDrafts() {
                 </div>
             </footer>
         </div>
-  )
+    )
 }
 
 export default AllDrafts

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './register.css'
@@ -12,9 +12,20 @@ export default function CreateUser() {
 
     const navigate = useNavigate();
 
+    function generarContrasena(longitud = 12) {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+        let contrasena = '';
+        for (let i = 0; i < longitud; i++) {
+            const indice = Math.floor(Math.random() * caracteres.length);
+            contrasena += caracteres.charAt(indice);
+        }
+        return contrasena;
+    }
+    const pass = generarContrasena(16);
+
     function handleSubmit(event){
         event.preventDefault();
-        axios.post(`http://localhost:${port}/admin/create`, {rol, email, name, apellidos})
+        axios.post(`http://localhost:${port}/admin/create`, {rol, email, pass, name, apellidos})
         .then(res => {
             if(res.data.Status === "Success"){
                 //console.log(res);
@@ -24,6 +35,31 @@ export default function CreateUser() {
             }
             
         }).catch(err=> console.log(err))
+    }
+    const [auth, setAuth] = useState(false);
+    axios.defaults.withCredentials = true;
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
+        })
+    })
+    const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
     return (
         <div>

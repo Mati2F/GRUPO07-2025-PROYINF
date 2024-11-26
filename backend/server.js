@@ -21,6 +21,7 @@ const db = mysql.createConnection({
     database: "analisis"
 })
 
+//Show boletines
 app.get("/", (req, res) => {
     const sql = "SELECT * FROM imagenes";
     db.query(sql, (err, data) => {
@@ -28,27 +29,6 @@ app.get("/", (req, res) => {
         return res.json(data)
     })
 })
-
-const verifyUser = (req,res,next) => {
-    const token = req.cookies.token;
-    if(!token){ //si no existe la cookie del login
-        return res.json({Error: "Not loged in :("})
-    }else {
-        jwt.verify(token, "jwt-secret-key", (err, decoded)=> {
-            if(err){
-                return res.json({Error: "Token not right"})
-            } else {
-                req.name = decoded.name
-                next();
-            }
-        })
-    }
-}
-app.get("/admin/all-drafts",verifyUser, (req, res) => {
-    return res.json({Status: "Success", name: req.name})
-    })
-
-
 //obtener por id
 app.get("/images/:id", (req, res) => {
     const sql = "SELECT * FROM imagenes WHERE id = ?";
@@ -59,14 +39,36 @@ app.get("/images/:id", (req, res) => {
     })
 })
 
+//Verify user with cookie
+const verifyUser = (req,res,next) => {
+    const token = req.cookies.token;
+    if(!token){ //si no existe la cookie del login
+        return res.json({Error: "Not loged in :("})
+    }else {
+        jwt.verify(token, "jwt-secret-key", (err, decoded)=> {
+            if(err){
+                return res.json({Error: "Token not right"})
+            } else {
+                req.name = decoded.name
+                req.role = decoded.role
+                next();
+            }
+        })
+    }
+}
+app.get("/admin/all-drafts",verifyUser, (req, res) => {
+    return res.json({Status: "Success", name: req.name, role: req.role})
+    })
+
 app.post('/login', (req, res) => {
     const sql= "SELECT * FROM users WHERE Correo = ? AND Pwd = ?"
 
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if(err) return res.json("Login Failed" )
         if(data.length > 0){
-            const name = data[0].name
-            const token = jwt.sign({name},"jwt-secret-key", {expiresIn: '1d'}); //Generate token\
+            const name = data[0].Nombre
+            const role = data[0].Rol
+            const token = jwt.sign({name, role},"jwt-secret-key", {expiresIn: '1d'}); //Generate token\
             res.cookie('token',token)
             return res.json("Login successfully")
         }else{
@@ -80,6 +82,7 @@ app.get('/logout', (req, res)=>{
     return res.json({Status: "Success"});
 })
 
+//  Show users
 app.get('/admin', (req, res) => {
     const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
@@ -88,11 +91,13 @@ app.get('/admin', (req, res) => {
     })
 })
 
+//Create usr
 app.post('/admin/create', (req,res) => {
-    const sql = "INSERT INTO users(`Rol`, `Correo`, `Nombre`, `Apellidos`) VALUES (?)";
+    const sql = "INSERT INTO users(`Rol`, `Correo`, `Pwd`, `Nombre`, `Apellidos`) VALUES (?)";
     const values = [
         req.body.rol,
         req.body.email,
+        req.body.pass,
         req.body.name,
         req.body.apellidos
     ]

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './creacion_boletines.css';
 /*import {Link} from 'react-router-dom'*/
 import AllDrafts from './AllDrafts';
@@ -15,6 +15,32 @@ function CreateNewsletters() {
             navigate('/')
         })
         .catch(err=> console.log(err))
+    }
+    const [auth, setAuth] = useState(false);
+    axios.defaults.withCredentials = true;
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
+        })
+    })
+
+    const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
     return (
     <div>

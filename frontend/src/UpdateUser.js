@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -20,6 +20,32 @@ export default function UpdateUser() {
             console.log(res);
             navigate('/admin')
         }).catch(err=> console.log(err.response.data))
+    }
+    const [auth, setAuth] = useState(false);
+    axios.defaults.withCredentials = true;
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
+        })
+    })
+
+    const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
     return (
         <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>

@@ -6,7 +6,19 @@ function Admin() {
     const port = process.env.PORT || 8081
 
     const [user, setUser] = useState([])
-
+    const [auth, setAuth] = useState(false);
+    axios.defaults.withCredentials = true;
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8081/admin/all-drafts')
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
+        })
+    })
     useEffect(() => {
         axios.get(`http://localhost:${port}/admin`)
         .then(res=> setUser(res.data))
@@ -21,6 +33,18 @@ function Admin() {
         }catch(err){
             console.log(err)
         }
+    }
+    const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
     return (
         <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
