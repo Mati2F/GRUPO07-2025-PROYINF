@@ -29,10 +29,7 @@ export default function CreateUser() {
         axios.post(`http://localhost:${port}/admin/create`, {rol, email, pass, name, apellidos})
         .then(res => {
             if(res.data.Status === "Success"){
-                axios.post(`http:/localhost:${port}`, {email, pass})
-                .then(()=> navigate('/admin'))
-                .catch(()=> alert("Oops, ocurrio un problema enviando la clave"))
-                
+                navigate('/admin')
             } else{
                 alert("Error creando usuario")
             }

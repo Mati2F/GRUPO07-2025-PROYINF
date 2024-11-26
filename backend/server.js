@@ -4,21 +4,16 @@ const port = process.env.PORT || 8081
 const mysql = require("mysql")
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
-const nodemailer = require('nodemailer')
 
 const app = express()
-app.use(express.json({limit: "25mb"}))
-app.use(express.urlencoded({limit:"25mb"}))
+app.use(express.json())
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["POST","GET"],
     credentials: true
 }))
 app.use(cookieParser())
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
-    next()
-})
+
 
 const db = mysql.createConnection({
     host: "localhost",

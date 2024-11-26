@@ -13,16 +13,19 @@ function Admin() {
         axios.get(`http://localhost:${port}/admin`)
             .then(res=> setUser(res.data))
             .catch(err=> console.log(err))
-            
+    })
+    useEffect(()=>{
         axios.get('http://localhost:8081/admin/all-drafts')
-            .then(res=> {
-                if(res.data.Status === "Success"){
-                    setAuth(true)
-                } else {
-                    setAuth(false)
-                }
+        .then(res=> {
+            if(res.data.Status === "Success"){
+                setAuth(true)
+            } else {
+                setAuth(false)
+            }
         })
     })
+    
+    
 
     const handleDelete= async (id) =>{
         try{
