@@ -9,12 +9,21 @@ function Boletines() {
     const [images, setImages] = useState([])
     const [Taimages, setTaImages] = useState([])
     const [resImages, setResImages] = useState("")
+    const [filter, setFilter] = useState([])
+    const [category, setCategory] = useState([])
 
     const peticionGet = async() => {
-    await axios.get(`http://localhost:${port}`)
+        await axios.get(`http://localhost:${port}`)
+            .then(res =>{
+            setImages(res.data);
+            setTaImages(res.data);
+            }).catch(err => console.log(err));
+    }
+
+    const categoryGet = async() => {
+        await axios.get(`http://localhost:${port}/categorias`)
         .then(res =>{
-        setImages(res.data);
-        setTaImages(res.data);
+            setCategory(res.data);
         }).catch(err => console.log(err));
     }
 
@@ -25,6 +34,8 @@ function Boletines() {
 
     useEffect(() => {
         peticionGet();
+        categoryGet();
+        
     }, [])
 
     const filtrar = (filtro) => {
@@ -33,6 +44,26 @@ function Boletines() {
         return null;
         });
         setImages(resultado);
+    }
+
+    const handleChangeCheckBox = e => {
+        let update = Taimages.filter((fp) => {
+            if(fp.categorias.toString().toLowerCase().includes(e.target.value.toLowerCase())) {return fp;}
+            return null;
+        })
+        if(e.target.checked){
+            setFilter(filter.concat(update));
+            setImages(filter)
+        }
+        else{
+
+        }
+        /*
+        if(e.target.checked){
+            setResImages(resImages + update)
+        } else {
+            setImages([...resImages.filter(fp => fp.categorias === e.target.value)])
+        }*/
     }
 
     return (
@@ -57,19 +88,10 @@ function Boletines() {
             <section className="main-content">
                 <aside className="filters">
                     <h3>Boletines</h3>
-                    <ul>
-                        <li>Alimentos <input type="checkbox" /></li>
-                        <li>Berries <input type="checkbox" /></li>
-                        <li>Cambio climatico <input type="checkbox" /></li>
-                        <li>Apicultura <input type="checkbox" /></li>
-                        <li>Bionergia <input type="checkbox" /></li>
-                        <li>Catastrofes <input type="checkbox" /></li>
-                        <li>Clima calido <input type="checkbox" /></li>
-                        <li>Clima templado <input type="checkbox" /></li>
-                        <li>Clima helado <input type="checkbox" /></li>
-                        <li>Ovinos <input type="checkbox" /></li>
-                        <li>TIC's <input type="checkbox" /></li>
-                    </ul>
+                        {category.map((item) => <li>
+                            <label>{item}</label>
+                            <input type="checkbox" value={item} onChange={handleChangeCheckBox}/>
+                        </li>)}
                 </aside>
 
                 <section className="boletines">
