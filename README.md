@@ -6,7 +6,9 @@ Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 * <mark>Constanza Hidalgo</mark> - 202273617-8
 * <mark>Daniel Quispe</mark> - 202273529-5
 * <mark>Matías Fernández</mark> - 202273506-6
-* **Tutor**: <mark>Eduardo Mendoza</mark>
+* **Tutor INF236 Analisis y Diseño de Software**: <mark>Ignacio Muñoz</mark>
+* **Tutor INF225 Ingenieria de Software**: <mark>Eduardo Mendoza</mark>
+(Los integrantes se mantienen para el proyecto 2025-1)
 
 ## Wiki
 Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F/GRUPO02-2024-PROYINF/wiki)
