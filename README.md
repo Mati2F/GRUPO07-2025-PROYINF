@@ -8,6 +8,7 @@ Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 * <mark>Matías Fernández</mark> - 202273506-6
 * **Tutor INF236 Analisis y Diseño de Software**: <mark>Ignacio Muñoz</mark>
 * **Tutor INF225 Ingenieria de Software**: <mark>Eduardo Mendoza</mark>
+
 (Los integrantes se mantienen para el proyecto 2025-1)
 
 ## Wiki
