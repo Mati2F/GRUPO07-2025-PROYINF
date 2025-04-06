@@ -1,4 +1,4 @@
-# GRUPO02-2024-PROYINF
+# GRUPO07-2025-PROYINF
 
 Este es el repositorio del *Grupo 2*, cuyos integrantes son:
 
