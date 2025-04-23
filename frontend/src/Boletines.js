@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from './Api.js'
 import './vista_boletines.css'
 
 
@@ -13,18 +13,30 @@ function Boletines() {
     const [category, setCategory] = useState([])
 
     const peticionGet = async() => {
-        await axios.get(`http://localhost:${port}`)
-            .then(res =>{
+        try{
+            const res = await api.get();
             setImages(res.data);
             setTaImages(res.data);
-            }).catch(err => console.log(err));
+        }catch(err){
+            console.log(err)
+        }
     }
 
+    const handleLogout = async () => {
+        try{
+            const res = await api.get('/logout');
+            navigate('/');
+        }catch (error){
+            console.log(error);
+        }
+    }
     const categoryGet = async() => {
-        await axios.get(`http://localhost:${port}/categorias`)
-        .then(res =>{
-            setCategory(res.data);
-        }).catch(err => console.log(err));
+        try{
+            const res = await api.get('/categorias');
+            setCategory(res.data)
+        }catch(err){
+            console.log(err)
+        }
     }
 
     useEffect(() => {

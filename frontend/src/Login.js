@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import axios from 'axios'
+import api from './Api.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
 import './login.css'
@@ -13,17 +13,21 @@ function Login() {
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.post(`http://localhost:${port}/login`, {email, password})
-        .then(res => {
-            console.log(res)
-            console.log(res);
-            if (res.data === "Login successfully") {
-                navigate('/admin/all-drafts');
-            } else {
-                alert("No record found. Please check your email and password.");
+        const login = async() => {
+            try{
+                const res = await api.post('/login', {email, password});
+                console.log(res)
+                console.log(res);
+                if (res.data === "Login successfully") {
+                    navigate('/admin/all-drafts');
+                } else {
+                    alert("No record found. Please check your email and password.");
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
-        .catch(err => console.log(err))
+        login();
+        }
     }
     
     return (
