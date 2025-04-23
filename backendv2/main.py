@@ -1,11 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, Cookie, Response
 from fastapi.middleware.cors import CORSMiddleware
-from database.database import db_engine, SQLModel
+from database.database import db_engine, SQLModel, Session, get_session
 from database import models
+from database.models import Users
+from database.login import db_check_user
+
 from routers.users import router as users_router
 from routers.boletines import router as boletines_router
 import uvicorn
+import bcrypt
+import jwt
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import sqlmodel
 
+SECRET_KEY = "jwt-secret-key"
 def create_tables():
     SQLModel.metadata.create_all(db_engine)
 
@@ -22,6 +30,28 @@ app.add_middleware(
 
 app.include_router(users_router)
 app.include_router(boletines_router)
+
+
+@app.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_session)):
+    # Query to find the user by email
+    try:
+        db_res = db_check_user(form_data)
+    except Exception as e:
+        return "Login Failed"
+
+    if db_res and bcrypt.checkpw(form_data.password.encode('utf-8'), db_res.pwd.encode('utf-8')):
+        # Generate JWT token
+        token = jwt.encode({"name": db_res.nombre, "role": db_res.rol}, "jwt-secret-key", algorithm="HS256")
+        return {"message": "Login successfully", "token": token}
+    else:
+        raise HTTPException(status_code=400, detail="No record")
+
+@app.get("/logout")
+async def logout(response: Response):
+    response.delete_cookie("token")  # Clear the token cookie
+    return {"Status": "Success"}
+
 
 @app.get("/")
 async def root():

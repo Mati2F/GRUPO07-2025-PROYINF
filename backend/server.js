@@ -85,27 +85,7 @@ app.get("/admin/all-drafts",verifyUser, (req, res) => {
     return res.json({Status: "Success", name: req.name, role: req.role})
     })
 
-app.post('/login', (req, res) => {
-    const sql= "SELECT * FROM users WHERE Correo = ? AND Pwd = ?"
 
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
-        if(err) return res.json("Login Failed" )
-        if(data.length > 0){
-            const name = data[0].Nombre
-            const role = data[0].Rol
-            const token = jwt.sign({name, role},"jwt-secret-key", {expiresIn: '1d'}); //Generate token\
-            res.cookie('token',token)
-            return res.json("Login successfully")
-        }else{
-            return res.json("No record")
-        }
-    })
-})
-
-app.get('/logout', (req, res)=>{
-    res.clearCookie('token')
-    return res.json({Status: "Success"});
-})
 
 //  Show users
 app.get('/admin', (req, res) => {

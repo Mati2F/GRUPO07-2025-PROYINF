@@ -23,7 +23,7 @@ class usersUpdate(BaseModel):
 class usersDelete(BaseModel):
     id: int
 
-#Agregar una compañia
+#Crear usuario
 def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
     statement = Users(
         rol=users.rol,
@@ -38,12 +38,12 @@ def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
     return statement
 
 
-#Obtener todas las compañias
+#Obtener usuarios
 def db_get_users(db: Session = Depends(get_session)):
     statement = db.exec(select(Users)).all()
     return statement
 
-#Actualizar una compañia segun id
+#Actualizar usuarios
 def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_session)):
     statement = db.get(users,id)
     if not statement:
@@ -56,7 +56,7 @@ def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_sessio
     db.refresh(statement)
     return statement
 
-#Eliminar una compañia segun id
+#Eliminar usuario
 def db_delete_users(id: int, db: Session = Depends(get_session)):
     statement = db.get(Users, id)
     if not statement:
