@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './individual_boletines.css';
-import axios from 'axios';
+import api from './Api.js'
+import axios from 'axios'
 
 function SingleDraft() {
 
@@ -8,15 +9,19 @@ function SingleDraft() {
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchPermission = async() => {
+            try{
+                const res = await api.post('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
-    })
+        fetchPermission();
+    }})
 
     const Pagina404 = () => {
         return (

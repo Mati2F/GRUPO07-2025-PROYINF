@@ -2,32 +2,39 @@ import React, {useEffect, useState} from 'react'
 import './creacion_boletines.css';
 /*import {Link} from 'react-router-dom'*/
 import AllDrafts from './AllDrafts';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import api from './Api.js'
 
 function CreateNewsletters() {
     const navigate = useNavigate();
-    const handleLogout = () => {
-        axios.get('http://localhost:8081/logout')
-        .then(res => {
-            //window.location.reload();
+    const handleLogout = async() => {
+        try{
+            const res = await api.get('/logout');
             navigate('/')
-        })
-        .catch(err=> console.log(err))
+        }catch(err){
+            console.log(err)
+        }
     }
+    
     const [auth, setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchPermission = async() => {
+            try{
+                const res = await api.get('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
+        };
+        fetchPermission();
     })
 
     const Pagina404 = () => {

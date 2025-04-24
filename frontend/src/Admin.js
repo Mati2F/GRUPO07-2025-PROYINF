@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import api from './Api.js'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
@@ -10,31 +11,42 @@ function Admin() {
     axios.defaults.withCredentials = true;
     
     useEffect(() => {
-        axios.get(`http://localhost:${port}/admin`)
-            .then(res=> setUser(res.data))
-            .catch(err=> console.log(err))
-    })
-    useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchUserData = async () => {
+            try {
+                const response = await api.get('/admin');
+                setUser(response.data);
+            } catch (error) {
+                console.log(error);
             }
-        })
-    })
-    
-    
+        };
+        fetchUserData();
+
+    }, []); // Empty dependency array means this runs once on mount
+
+    useEffect(()=>{
+        const fetchPermission = async () => {
+            try {
+                const res = await api.get('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                }else {
+                    setAuth(false)}
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchPermission();
+    }, []); // Empty dependency array means this runs once on mount
 
     const handleDelete= async (id) =>{
         try{
-            await axios.delete(`http://localhost:${port}/admin/`+id)
+            await api.delete('/admin/'+id)
             window.location.reload()
         }catch(err){
             console.log(err)
         }
     }
+    
     const Pagina404 = () => {
         return (
             <div>

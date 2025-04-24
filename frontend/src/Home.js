@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './inicio.css'
-import axios from 'axios';
+import axios from 'axios'
+import api from './Api.js'
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -8,14 +9,20 @@ function Home() {
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchPermission = async() => {
+            try{
+                const res = await api.get('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
+        
+        fetchPermission();
+    }
     })
     
     return (

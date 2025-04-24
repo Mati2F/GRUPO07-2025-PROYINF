@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react'
+import api from './Api.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './register.css'
@@ -26,33 +27,40 @@ export default function CreateUser() {
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.post(`http://localhost:${port}/admin/create`, {rol, email, pass, name, apellidos})
-        .then(res => {
-            if(res.data.Status === "Success"){
-                //axios.post(`http://localhost:8081/send_email`, {email, pass})
-                    //.then(()=> navigate('/admin'))
-                    //.catch(()=> alert("Oops, ocurrio un problema enviando la clave"))
+        const createUser = async() => {
+            try{
+                const res = await api.post('/admin/create', {rol, email, pass, name, apellidos});
+                if(res.data.Status === "Success"){
                     alert(`The password is: ${pass}`)
                     navigate('/admin')
-            } else{
-                alert("Error creando usuario")
+                } else {
+                    alert("Error creando usuario")
+                }
+            }catch(err){
+                console.log(err)
             }
-            
-        }).catch(err=> console.log(err))
-    }
+        
+        createUser();
+    }}
+
     const [auth, setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchPermission = async() => {
+            try{
+                const res = await api.post('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
-    })
+        fetchPermission();
+    }})
+
     const Pagina404 = () => {
         return (
             <div>

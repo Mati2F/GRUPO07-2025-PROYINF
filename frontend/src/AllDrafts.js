@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import './vista_boletines.css';
-import axios from 'axios';
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import api from './Api.js'
 
 function AllDrafts() {
     const [auth, setAuth] = useState(false);
@@ -13,30 +13,38 @@ function AllDrafts() {
 
     axios.defaults.withCredentials = true;
     
-    const handleLogout = () => {
-        axios.get('http://localhost:8081/logout')
-        .then(res => {
-            //window.location.reload();
-            navigate('/')
-        })
-        .catch(err=> console.log(err))
+    const handleLogout = async () => {
+        try{
+            const res = await api.get('/logout');
+            navigate('/');
+        }catch (error){
+            console.log(error);
+        }
     }
+    
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-                setName(res.data.name)
-                if(res.data.role === 1){
-                    setRole(true) 
+        const initUserData = async () => {
+            try {
+                const res = await api.get('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                    setName(res.data.name)
+                    if(res.data.role === 1){
+                        setRole(true) 
+                    }
+                    
+                } else {
+                    setAuth(false)
+                    setMessage(res.data.error)
                 }
-                
-            } else {
-                setAuth(false)
-                setMessage(res.data.error)
+            } catch (error) {
+                console.log(error);
             }
-        })
-    })
+        };
+        initUserData();
+
+    }, []); // Empty dependency array means this runs once on mount
+
     const Pagina404 = () => {
         return (
             <div>

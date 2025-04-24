@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import api from './Api.js'
+import axios from 'axios'
 
 export default function UpdateUser() {
     const [rol, setRol] = useState('')
@@ -15,25 +16,34 @@ export default function UpdateUser() {
 
     function handleSubmit(event){
         event.preventDefault();
-        axios.put(`http://localhost:${port}/admin/update/`+id, {rol, email, pwd, name, apellidos})
-        .then(res => {
-            console.log(res);
-            navigate('/admin')
-        }).catch(err=> console.log(err.response.data))
+        const updateUser = async() => {
+            try{
+                const res = await api.put('/admin/update'+id, {rol, email, pwd, name, apellidos});
+                console.log(res);
+                navigate('/admin')
+            }catch(err){
+                console.log(err)
+            }
+        updateUser();
+        }
     }
     const [auth, setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
-        axios.get('http://localhost:8081/admin/all-drafts')
-        .then(res=> {
-            if(res.data.Status === "Success"){
-                setAuth(true)
-            } else {
-                setAuth(false)
+        const fetchPermission = async() => {
+            try{
+                const res = await api.post('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                } else {
+                    setAuth(false)
+                }
+            }catch(err){
+                console.log(err)
             }
-        })
-    })
+        fetchPermission();
+    }})
 
     const Pagina404 = () => {
         return (
