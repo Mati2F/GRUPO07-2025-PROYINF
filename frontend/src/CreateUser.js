@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import api from './Api.js'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './register.css'
 

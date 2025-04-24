@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import api from './Api.js'
+import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 function Admin() {

@@ -1,5 +1,6 @@
 import React, {useState } from 'react'
 import api from './Api.js'
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
 import './login.css'
@@ -16,7 +17,7 @@ function Login() {
         const login = async() => {
             try{
                 const res = await api.post('/login', {email, password});
-                console.log(res)
+                console.log(res);
                 console.log(res);
                 if (res.data === "Login successfully") {
                     navigate('/admin/all-drafts');

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './individual_boletines.css';
 import api from './Api.js'
+import axios from 'axios'
 
 function SingleDraft() {
 

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import api from './Api.js'
+import axios from 'axios'
 
 export default function UpdateUser() {
     const [rol, setRol] = useState('')

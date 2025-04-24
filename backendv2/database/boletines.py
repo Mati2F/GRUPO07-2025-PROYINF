@@ -15,6 +15,7 @@ class bolPdf(BaseModel):
     pdf: bytes
     id: int
 class bolResponse(BaseModel):
+    id: int
     categoria: int
     fecha: datetime
 

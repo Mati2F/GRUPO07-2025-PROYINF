@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import api from './Api.js'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import './vista_boletines.css'
+import {Link} from 'react-router-dom'
 
 
 const port = process.env.PORT || 8081
@@ -11,10 +14,11 @@ function Boletines() {
     const [resImages, setResImages] = useState("")
     const [filter, setFilter] = useState([])
     const [category, setCategory] = useState([])
+    const navigate = useNavigate();
 
     const peticionGet = async() => {
         try{
-            const res = await api.get();
+            const res = await api.get("/bol");
             setImages(res.data);
             setTaImages(res.data);
         }catch(err){
@@ -113,20 +117,19 @@ function Boletines() {
             <section className="main-content">
                 <aside className="filters">
                     <h3>Boletines</h3>
-                        {category.map((item) => <li>
+                        {/* {category.map((item) => <li>
                             <label>{item}</label>
                             <input type="checkbox" value={item} onChange={handleChangeCheckBox}/>
-                        </li>)}
+                        </li>)} */}
                 </aside>
-
                 <section className="boletines">
             <div className="search-bar">
-                <input 
+                {/* <input 
                     className="form-control inputBuscar"
                     value={resImages}
                     placeholder="Busqueda de categorias"
                     onChange={handleChange}
-                />
+                /> */}
                 <button>Recientes</button>
                 <button>Más Vistos</button>
                 <button>Rating</button>
@@ -134,19 +137,20 @@ function Boletines() {
 
 			<div className="boletin-container">
                 <table className="table table-sm table-bordered">
-                <thead>
-                    <tr>
-                        <th>url</th>
-                        <th>categorias</th>
-                    </tr>
-                </thead>
-
+                <tr>
+                    <td>Boton?</td>
+                    <td>Categoria</td>
+                    <td>fecha</td>
+                </tr>
                 <tbody>
                     {images &&
                     images.map((ima) => (
                         <tr key={ima.id}>
-                            <td>{ima.url}</td>
-                            <td>{ima.categorias}</td>
+                            <td>
+                                <Link to={`${ima.id}`} className='btn btn-primary'>Boletin {ima.id}</Link>
+                            </td>
+                            <td>{ima.categoria}</td>
+                            <td>{ima.fecha}</td>
                         </tr>
                     ))}
                 </tbody>
