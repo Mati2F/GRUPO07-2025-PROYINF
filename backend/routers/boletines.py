@@ -34,13 +34,13 @@ def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
     return db_comp
 
 #Get pdf
-@router.get("/", tags=["bol"])
-def get_bol(id: int, db: Session = Depends(get_session))->bytes:
-    try:
-        db_comp = db_get_pdf(id,db)
-    except NotFoundError as e:
-        raise HTTPException(status_code=404) from e
-    return db_comp
+#@router.get("/", tags=["bol"])
+#def get_bol(id: int, db: Session = Depends(get_session))->bytes:
+#    try:
+#        db_comp = db_get_pdf(id,db)
+#    except NotFoundError as e:
+#        raise HTTPException(status_code=404) from e
+#    return db_comp
 
 
 #Actualizar boletin

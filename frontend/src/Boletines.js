@@ -19,6 +19,7 @@ function Boletines() {
     const peticionGet = async() => {
         try{
             const res = await api.get("/bol");
+            console.log(res)
             setImages(res.data);
             setTaImages(res.data);
         }catch(err){

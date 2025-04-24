@@ -14,6 +14,7 @@ from fastapi.encoders import jsonable_encoder
 class bolPdf(BaseModel):
     pdf: bytes
     id: int
+
 class bolResponse(BaseModel):
     id: int
     categoria: int
@@ -41,7 +42,7 @@ async def db_create_bol(cat: int,file: UploadFile=File(...), db: Session = Depen
 
 #Obtener boletines
 def db_get_bol(db: Session = Depends(get_session)):
-    statement = db.exec(select(Boletines.categoria, Boletines.fecha)).all()
+    statement = db.exec(select(Boletines.id, Boletines.categoria, Boletines.fecha)).all()
     return statement
 
 #Extraer pdf segun id boletin
