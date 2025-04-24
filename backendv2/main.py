@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, Cookie, Response
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from database.database import db_engine, SQLModel, Session, get_session
 from database import models
@@ -45,9 +46,12 @@ async def login(form_data: LoginForm, db: Session = Depends(get_session)):
     if db_res and bcrypt.checkpw(form_data.password.encode('utf-8'), db_res.pwd.encode('utf-8')):
         # Generate JWT token
         token = jwt.encode({"name": db_res.nombre, "role": db_res.rol}, "jwt-secret-key", algorithm="HS256")
-        return {"message": "Login successfully", "token": token}
-    else:
-        raise HTTPException(status_code=404, detail="No record")
+        
+        response = JSONResponse(content={"message": "Login successfully"})
+        response.set_cookie(key="token", value=token, httponly=True, secure=True)
+
+        return response
+
 
 @app.get("/logout")
 async def logout(response: Response):

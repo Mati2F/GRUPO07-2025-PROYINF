@@ -19,7 +19,7 @@ class Users(SQLModel, table=True):
     userId: Optional[int] = Field(default=None,primary_key=True)
     rol: int = Field(sa_type=SmallInteger)
     correo: str = Field(sa_type = String(255))
-    pwd: str = Field(sa_type =String(15))
+    pwd: str = Field(sa_type =String(60))
     nombre: str = Field(sa_type =String(50))
     apellidos: str = Field(sa_type =String(255))
 

@@ -5,7 +5,7 @@ from sqlmodel import Session
 from fastapi import  HTTPException, Depends
 from .models import Users
 from .database import Session, get_session
-
+import bcrypt
 class usersCreate(BaseModel):
     rol: int
     correo: EmailStr
@@ -25,10 +25,11 @@ class usersDelete(BaseModel):
 
 #Crear usuario
 def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
+    hashed_password = bcrypt.hashpw(users.pwd.encode('utf-8'), bcrypt.gensalt())
     statement = Users(
         rol=users.rol,
         correo=users.correo,
-        pwd=users.pwd,
+        pwd=hashed_password,
         nombre=users.nombre,
         apellidos=users.apellidos
     )

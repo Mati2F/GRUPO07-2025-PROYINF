@@ -6,6 +6,7 @@ from fastapi import  HTTPException, Depends
 from .models import Users
 from .database import Session, get_session
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import bcrypt
 class usersCreate(BaseModel):
     rol: int
     correo: EmailStr
@@ -16,10 +17,18 @@ class usersCreate(BaseModel):
 class LoginForm(BaseModel):
     email: str
     password: str
-    
-#Login check user
+
+# Login check user
 def db_check_user(data: LoginForm, db: Session = Depends(get_session)):
-    statement = db.exec(select(Users).where((Users.correo == data.email)&(Users.pwd == data.password))).first()
-    if not statement:
-        raise HTTPException(status_code=404, detail="No record found. Please check your email and password.")
-    return statement
+    # Query to get the user by email only
+    user = db.exec(select(Users).where(Users.correo == data.email)).first()
+    
+    # Check if user exists
+    if not user:
+        raise HTTPException(status_code=404, detail="No record found. Please check your email")
+
+    # Verify the password against the hashed password in the database
+    if not bcrypt.checkpw(data.password.encode('utf-8'), user.pwd.encode('utf-8')):
+        raise HTTPException(status_code=400, detail="Invalid password.")
+
+    return user

@@ -3,5 +3,5 @@ sqlmodel
 sqlalchemy
 pydantic
 pyodbc
-jwt
+PyJWT
 bcrypt
