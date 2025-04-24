@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './vista_boletines.css';
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import api from './Api.js'
 
