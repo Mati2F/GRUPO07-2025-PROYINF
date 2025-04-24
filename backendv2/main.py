@@ -12,6 +12,7 @@ import bcrypt
 import jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import sqlmodel
+from schemas import LoginForm
 
 SECRET_KEY = "jwt-secret-key"
 def create_tables():
@@ -33,19 +34,20 @@ app.include_router(boletines_router)
 
 
 @app.post("/login")
-async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_session)):
-    # Query to find the user by email
+async def login(form_data: LoginForm, db: Session = Depends(get_session)):
     try:
-        db_res = db_check_user(form_data)
+        db_res = db_check_user(form_data, db)
+    except HTTPException as http_exc: #Captura el user not found que levanta db_check_user
+        raise http_exc
     except Exception as e:
-        return "Login Failed"
-
+        raise HTTPException(status_code=500, detail="Login failed due to an unexpected error.")
+    
     if db_res and bcrypt.checkpw(form_data.password.encode('utf-8'), db_res.pwd.encode('utf-8')):
         # Generate JWT token
         token = jwt.encode({"name": db_res.nombre, "role": db_res.rol}, "jwt-secret-key", algorithm="HS256")
         return {"message": "Login successfully", "token": token}
     else:
-        raise HTTPException(status_code=400, detail="No record")
+        raise HTTPException(status_code=404, detail="No record")
 
 @app.get("/logout")
 async def logout(response: Response):
