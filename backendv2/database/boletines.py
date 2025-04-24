@@ -13,6 +13,7 @@ from fastapi.encoders import jsonable_encoder
 
 
 class bolResponse(BaseModel):
+    id: int
     categoria: int
     fecha: datetime
 

@@ -3,6 +3,7 @@ import api from './Api.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import './vista_boletines.css'
+import {Link} from 'react-router-dom'
 
 
 const port = process.env.PORT || 8081
@@ -145,7 +146,9 @@ function Boletines() {
                     {images &&
                     images.map((ima) => (
                         <tr key={ima.id}>
-                            <td> <button>boletin</button> </td>
+                            <td>
+                                <Link to={`${ima.id}`} className='btn btn-primary'>Boletin {ima.id}</Link>
+                            </td>
                             <td>{ima.categoria}</td>
                             <td>{ima.fecha}</td>
                         </tr>
