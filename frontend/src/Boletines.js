@@ -18,7 +18,6 @@ function Boletines() {
     const peticionGet = async() => {
         try{
             const res = await api.get("/bol");
-            console.log(res.data)
             setImages(res.data);
             setTaImages(res.data);
         }catch(err){
@@ -122,7 +121,6 @@ function Boletines() {
                             <input type="checkbox" value={item} onChange={handleChangeCheckBox}/>
                         </li>)} */}
                 </aside>
-
                 <section className="boletines">
             <div className="search-bar">
                 {/* <input 
@@ -138,16 +136,20 @@ function Boletines() {
 
 			<div className="boletin-container">
                 <table className="table table-sm table-bordered">
-
-
+                <tr>
+                    <td>Boton?</td>
+                    <td>Categoria</td>
+                    <td>fecha</td>
+                </tr>
                 <tbody>
-                    {/* {images &&
+                    {images &&
                     images.map((ima) => (
                         <tr key={ima.id}>
-                            <td>{ima.url}</td>
-                            <td>{ima.categorias}</td>
+                            <td> <button>boletin</button> </td>
+                            <td>{ima.categoria}</td>
+                            <td>{ima.fecha}</td>
                         </tr>
-                    ))} */}
+                    ))}
                 </tbody>
                 </table>
             </div>
