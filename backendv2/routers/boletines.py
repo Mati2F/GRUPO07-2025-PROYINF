@@ -14,7 +14,7 @@ router = APIRouter(
     prefix='/bol',
 )
 
-#file: UploadFile = File(...), 
+#Create boletin
 @router.post("/",  tags=["bol"])
 async def create_bol(categoria: int = Form(...),file: UploadFile = File(...), db: Session = Depends(get_session))->bolResponse:
     try:
@@ -23,9 +23,9 @@ async def create_bol(categoria: int = Form(...),file: UploadFile = File(...), db
         raise HTTPException(status_code=404) from e
     return db_comp
 
-
+#Get display boletines
 @router.get("/", tags=["bol"])
-def get_bol(db: Session = Depends(get_session))->list[Boletines]:
+def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
     try:
         db_comp = db_get_bol(db)
     except NotFoundError as e:
@@ -34,7 +34,7 @@ def get_bol(db: Session = Depends(get_session))->list[Boletines]:
 
 
 
-#Actualizar una compañia segun id
+#Actualizar boletin
 @router.put("/{id}", tags=["bol"])
 def update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session))->bolUpdate:
     try:
@@ -43,7 +43,7 @@ def update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session))->bolU
         raise HTTPException(status_code=404) from e
     return db_comp
 
-#Eliminar una compañia segun id
+#Eliminar boletin
 @router.delete("/{id}", tags=["bol"])
 def delete_bol(id: int, db: Session = Depends(get_session)):
     try:
