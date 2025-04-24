@@ -11,7 +11,9 @@ from datetime import datetime, date
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 
-
+class bolPdf(BaseModel):
+    pdf: bytes
+    id: int
 class bolResponse(BaseModel):
     categoria: int
     fecha: datetime
@@ -23,7 +25,7 @@ class bolDelete(BaseModel):
     id: int
 
 
-#
+#Crea boletin
 async def db_create_bol(cat: int,file: UploadFile=File(...), db: Session = Depends(get_session)):
     pdf_content = await file.read()
     statement = Boletines(
@@ -36,13 +38,19 @@ async def db_create_bol(cat: int,file: UploadFile=File(...), db: Session = Depen
     db.refresh(statement)
     return statement
 
-
-#Obtener todas las compañias
+#Obtener boletines
 def db_get_bol(db: Session = Depends(get_session)):
-    statement = db.exec(select(Boletines)).all()
+    statement = db.exec(select(Boletines.categoria, Boletines.fecha)).all()
     return statement
 
-#Actualizar una compañia segun id
+#Extraer pdf segun id boletin
+def db_get_pdf(id:int, db: Session=Depends(get_session)):
+    statement = db.exect(
+        select(bolPdf.pdf)
+        .where(bolPdf.id == id))
+    return statement
+
+#Actualizar boletin
 def db_update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session)):
     statement = db.get(bol,id)
     if not statement:
@@ -55,7 +63,7 @@ def db_update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session)):
     db.refresh(statement)
     return statement
 
-#Eliminar una compañia segun id
+#Eliminar boletin
 def db_delete_bol(id: int, db: Session = Depends(get_session)):
     statement = db.get(Boletines, id)
     if not statement:

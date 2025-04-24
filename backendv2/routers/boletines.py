@@ -3,6 +3,7 @@ from database.boletines import (
     db_create_bol,
     db_delete_bol,
     db_get_bol,
+    db_get_pdf,
     db_update_bol
 )
 from database.models import Boletines, NotFoundError
@@ -32,6 +33,14 @@ def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
         raise HTTPException(status_code=404) from e
     return db_comp
 
+#Get pdf
+@router.get("/", tags=["bol"])
+def get_bol(id: int, db: Session = Depends(get_session))->bytes:
+    try:
+        db_comp = db_get_pdf(id,db)
+    except NotFoundError as e:
+        raise HTTPException(status_code=404) from e
+    return db_comp
 
 
 #Actualizar boletin
