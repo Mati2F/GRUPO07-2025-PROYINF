@@ -36,6 +36,7 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
    - primero hay que entrar a la carpeta de "backend" usando el comando `cd backend`
    - luego se crea el ambiente con el comando `python -m venv <Nombre del ambiente>` en lo particular recomendamos `python -m venv myenv`
    - Si la creación se hizo correctamente se debería poder ingresar al ambiente virtual con el comando `.\<Nombre del ambiente>\Scripts\Activate.ps1 `, si se uso el myenv `.\myenv\Scripts\Activate.ps1 `. Si tira error por ejecución de Script, en una consola de administrador hay que usar el comando `Set-ExecutionPolicy Unrestricted`.
+   - Es necesario que el "python.exe" con el cual se esta trabajando sea el que esta dentro del ambiente. Es decir, `.\myenv\Scripts\python.exe`.
    - Una vez dentro se instalan todos los requerimientos necesarios con el comando `pip install -r .\requirements.txt`
 4. Ahora en la misma ruta que se tiene después de hacer todos los pasos anteriores se usa el comando `uvicorn main:app --reload`
 5. Luego, abra otra terminal y diríjase a la carpeta frontend con "cd frontend".
