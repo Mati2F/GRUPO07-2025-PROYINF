@@ -28,25 +28,22 @@ function Home() {
     return (
         <body>
         <div>
-            <header>
-                <div class="header-container">
-                    <img src= "./logo.png" alt="Logo FIA" class="logo"/>
-                    <nav>
-                        <ul class="nav-menu">
-                            <li><a href="/Boletines">Boletines</a></li>
-                            <li><a href="#">Solutions</a></li>
-                            <li><a href="#">Contact</a></li>
-                            {auth ? 
-                            <li><a href="/admin/all-drafts" className="login-button">Borradores</a></li> 
-                            : 
-                            <li><a href="/Login" class="login-button">Inicia sesión</a></li>
-                            }
-                            
-                        </ul>
-                    </nav>
+        <header>
+                <div className="header-container">
+                    <a href = "/">
+                        <img src="/minagri.png" alt="Logo" className="logo" />
+                    </a>
                 </div>
+                <nav>
+                    <div className="logo"></div>
+                    <ul className="nav-menu">
+                        <li><a href="/Boletines">Boletines</a></li>
+                        <li><a href="/">Solutions</a></li>
+                        <li><a href="/">Contact</a></li>
+                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
+                    </ul>
+                </nav>
             </header>
-
             <section class="main-section">
                 <div class="main-content">
                     <h1>FUNDACIÓN PARA LA INNOVACIÓN AGRARIA</h1>
