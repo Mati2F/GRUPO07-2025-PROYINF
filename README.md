@@ -24,8 +24,10 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
   
 ## Información para importar la base de datos:
 * En la carpeta "BaseDeDatos" se encuentra el archivo "grupo07.bacpac" el cual se debe importar en la carpeta Databases.
+* Se tiene que instalar un driver [Driver](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
 * Se va a import Data-tier Aplication y se sube el archivo con la base de datos.
 ![alt text](https://github.com/Mati2F/GRUPO07-2025-PROYINF/blob/main/docs/import.png)
+
 
 ## Pasos para levantar el proyecto:
 1. Lo primero es clonar el proyecto subido a [Github](https://github.com/Mati2F/GRUPO07-2025-PROYINF).
@@ -33,7 +35,7 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
 3. Ahora por consola se tiene que hacer un ambiente virtual, el cual se crea de la siguiente forma:
    - primero hay que entrar a la carpeta de "backend" usando el comando `cd backend`
    - luego se crea el ambiente con el comando `python -m venv <Nombre del ambiente>` en lo particular recomendamos `python -m venv myenv`
-   - Si la creación se hizo correctamente se debería poder ingresar al ambiente virtual con el comando `.\<Nombre del ambiente>\Scripts\Activate.ps1 `, si se uso el myenv `.\myenv\Scripts\Activate.ps1 `
+   - Si la creación se hizo correctamente se debería poder ingresar al ambiente virtual con el comando `.\<Nombre del ambiente>\Scripts\Activate.ps1 `, si se uso el myenv `.\myenv\Scripts\Activate.ps1 `. Si tira error por ejecución de Script, en una consola de administrador hay que usar el comando `Set-ExecutionPolicy Unrestricted`.
    - Una vez dentro se instalan todos los requerimientos necesarios con el comando `pip install -r .\requirements.txt`
 4. Ahora en la misma ruta que se tiene después de hacer todos los pasos anteriores se usa el comando `uvicorn main:app --reload`
 5. Luego, abra otra terminal y diríjase a la carpeta frontend con "cd frontend".
