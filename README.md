@@ -28,8 +28,8 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Mati2F
 ![alt text](https://github.com/Mati2F/GRUPO07-2025-PROYINF/blob/main/docs/import.png)
 
 ## Pasos para levantar el proyecto:
-1. Lo primero es clonar el proyecto subido a [Github](https://github.com/Mati2F/GRUPO02-2024-PROYINF).
-2. Dirigirse a la carpeta donde se encuentra el proyecto a través de la terminal (el ultimo camino debe ser la carpeta "GRUPO02-2024-PROYINF")
+1. Lo primero es clonar el proyecto subido a [Github](https://github.com/Mati2F/GRUPO07-2025-PROYINF).
+2. Dirigirse a la carpeta donde se encuentra el proyecto a través de la terminal (el ultimo camino debe ser la carpeta "GRUPO07-2025-PROYINF")
 3. Ahora por consola se tiene que hacer un ambiente virtual, el cual se crea de la siguiente forma:
    - primero hay que entrar a la carpeta de "backend" usando el comando `cd backend`
    - luego se crea el ambiente con el comando `python -m venv <Nombre del ambiente>` en lo particular recomendamos `python -m venv myenv`
