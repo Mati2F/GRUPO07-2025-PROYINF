@@ -40,7 +40,10 @@ function ViewBoletin() {
         }
     };
 
-    
+    const handleVerPdf = () => {
+        window.open(`http://localhost:8000/bol/pdf/2`, '_blank')
+    };
+   
 
     return (
         <div>
@@ -69,7 +72,7 @@ function ViewBoletin() {
             <div className="borrador-container">
                 <div className="borrador-card">
                     <img src={"/BoletinFia.jpg"} alt="Portada del Boletín" className="borrador-image" />
-                    <button className="access-button">Acceder</button>
+                    <button className="access-button" onClick={handleVerPdf}>Ver PDF</button>
                     <button onClick={handleShare}>Compartir</button>
                 </div>
             </div>

@@ -52,6 +52,13 @@ def db_get_pdf(id:int, db: Session=Depends(get_session)):
         .where(bolPdf.id == id))
     return statement
 
+#Version para ver si funciona el visor de pdf
+def db_get_pdf2(id: int, db: Session):
+    boletin = db.get(Boletines, id)
+    if not boletin:
+        raise HTTPException(status_code=404, detail="Boletín no encontrado")
+    return boletin.pdf
+
 #Actualizar boletin
 def db_update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session)):
     statement = db.get(bol,id)

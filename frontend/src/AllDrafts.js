@@ -3,6 +3,7 @@ import './vista_boletines.css';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import api from './Api.js'
+import {Link} from 'react-router-dom'
 
 function AllDrafts() {
     const [auth, setAuth] = useState(false);
@@ -81,7 +82,6 @@ function AllDrafts() {
                                 <button onClick={handleLogout}
                                     className="nav-link-outline-0 border-0 bg-red text-prima" class="login-button"
                                     href="/">Cerrar sesion</button></li>
-
                         </ul>
                     </nav>
                 </header><section className="main-content">

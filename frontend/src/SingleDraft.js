@@ -39,7 +39,7 @@ function SingleDraft() {
     <div>
     <header>
         <div className="header-container">
-            <img src={"/logo"} alt="Logo" className="logo" />
+            <img src="./logo.png" alt="Logo FIA" className="logo" />
         </div>
         <nav>
             <div className="logo"></div>
@@ -57,7 +57,7 @@ function SingleDraft() {
         
         <div className="borrador-container">
             <div className="borrador-card">
-                <img src={"./BoletinFia"} alt="Portada del Boletín" className="borrador-image" />
+                <img src={"./BoletinFia.jpg"} alt="Portada del Boletín" className="borrador-image" />
                 <button className="access-button">Acceder</button>
             </div>
         </div>
@@ -66,7 +66,7 @@ function SingleDraft() {
     <footer>
         <div className="footer-container">
             <div className="footer-left">
-                <img src={"./minagri"} alt="MINAGRI logo" />
+                <img src="./minagri.png" alt="MINAGRI logo" />
             </div>
             <div className="footer-right">
                 <div className="footer-section">
@@ -83,9 +83,21 @@ function SingleDraft() {
                 <div className="footer-section">
                     <h4>Redes sociales</h4>
                     <p>
-                        <a href="#"><i className="fab fa-facebook"></i></a>
-                        <a href="#"><i className="fab fa-twitter"></i></a>
-                        <a href="#"><i className="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/FIA_Chile">
+                            <img className = "iconoX" src = "/iconos/X.png"></img>
+                        </a>
+                         <a href="https://www.instagram.com/fia_chile/">
+                            <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                        </a>
+                         <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
+                            <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                        </a>
+                         <a href="https://www.linkedin.com/company/fiachile">
+                            <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                        </a>
+                         <a href="https://www.facebook.com/OpiaChile/">
+                            <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                        </a>
                     </p>
                 </div>
             </div>
