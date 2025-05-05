@@ -14,15 +14,10 @@ from fastapi.encoders import jsonable_encoder
 class bolPdf(BaseModel):
     pdf: bytes
     id: int
-
 class bolResponse(BaseModel):
     id: int
     categoria: int
     fecha: datetime
-
-class bolUpdate(BaseModel):
-    nombre: str
-
 class bolDelete(BaseModel):
     id: int
 
@@ -59,24 +54,11 @@ def db_get_pdf2(id: int, db: Session):
         raise HTTPException(status_code=404, detail="Boletín no encontrado")
     return boletin.pdf
 
-#Actualizar boletin
-def db_update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session)):
-    statement = db.get(bol,id)
-    if not statement:
-        raise HTTPException(status_code=404, detail="statement not found")
-    data = bol.dict(exclude_unset=True)
-    for key, value in data.items():
-        setattr(statement, key, value)
-    db.add(statement)
-    db.commit()
-    db.refresh(statement)
-    return statement
-
 #Eliminar boletin
 def db_delete_bol(id: int, db: Session = Depends(get_session)):
     statement = db.get(Boletines, id)
     if not statement:
-        raise HTTPException(status_code=404, detail="Flow State not found")
+        raise HTTPException(status_code=404, detail="Boletin not found")
     db.delete(statement)
     db.commit()
-    return {"message":f"bol {id} eliminado correctamente"}
+    return {"message":f"boletin {id} eliminado correctamente"}

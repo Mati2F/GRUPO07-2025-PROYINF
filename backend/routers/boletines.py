@@ -1,10 +1,9 @@
 from database.boletines import (
-    bolDelete, bolResponse, bolUpdate,
+    bolDelete, bolResponse,
     db_create_bol,
     db_delete_bol,
     db_get_bol,
     db_get_pdf,
-    db_update_bol,
     db_get_pdf2
 )
 from database.models import Boletines, NotFoundError
@@ -19,7 +18,7 @@ router = APIRouter(
 )
 
 #Create boletin
-@router.post("/",  tags=["bol"])
+@router.post("/",  tags=["boletines"])
 async def create_bol(categoria: int = Form(...),file: UploadFile = File(...), db: Session = Depends(get_session))->bolResponse:
     try:
         db_comp = await db_create_bol(categoria, file, db)
@@ -28,7 +27,7 @@ async def create_bol(categoria: int = Form(...),file: UploadFile = File(...), db
     return db_comp
 
 #Get display boletines
-@router.get("/", tags=["bol"])
+@router.get("/", tags=["boletines"])
 def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
     try:
         db_comp = db_get_bol(db)
@@ -36,36 +35,18 @@ def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
         raise HTTPException(status_code=404) from e
     return db_comp
 
-#Get pdf
-#@router.get("/", tags=["bol"])
-#def get_bol(id: int, db: Session = Depends(get_session))->bytes:
-#    try:
-#        db_comp = db_get_pdf(id,db)
-#    except NotFoundError as e:
-#        raise HTTPException(status_code=404) from e
-#    return db_comp
-
-
-#Actualizar boletin
-@router.put("/{id}", tags=["bol"])
-def update_bol(id:int, bol: bolUpdate, db: Session = Depends(get_session))->bolUpdate:
-    try:
-        db_comp = db_update_bol(id, bol, db)
-    except NotFoundError as e:
-        raise HTTPException(status_code=404) from e
-    return db_comp
+#Obtener pdf boletin
+@router.get("/pdf/{id}", tags=["boletines"])
+def get_pdf(id: int, db: Session = Depends(get_session)):
+    pdf_content = db_get_pdf2(id, db)
+    return StreamingResponse(BytesIO(pdf_content), media_type="application/pdf")
 
 #Eliminar boletin
-@router.delete("/{id}", tags=["bol"])
+@router.delete("/{id}", tags=["boletines"])
 def delete_bol(id: int, db: Session = Depends(get_session)):
     try:
         db_comp = db_delete_bol(id, db)
     except NotFoundError as e:
         raise HTTPException(status_code=404) from e
-    return {"message":f"bol {id} eliminado correctamente"}
+    return {"message":f"boletin {id} eliminado correctamente"}
 
-#Agregado para ver si funciona el visor de PDF
-@router.get("/pdf/{id}", tags=["bol"])
-def get_pdf(id: int, db: Session = Depends(get_session)):
-    pdf_content = db_get_pdf2(id, db)
-    return StreamingResponse(BytesIO(pdf_content), media_type="application/pdf")

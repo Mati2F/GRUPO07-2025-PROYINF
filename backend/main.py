@@ -8,6 +8,7 @@ from database.login import db_check_user
 
 from routers.users import router as users_router
 from routers.boletines import router as boletines_router
+from routers.borradores import router as drafts_router
 import uvicorn
 import bcrypt
 import jwt
@@ -32,7 +33,7 @@ app.add_middleware(
 
 app.include_router(users_router)
 app.include_router(boletines_router)
-
+app.include_router(drafts_router)
 
 @app.post("/login")
 async def login(form_data: LoginForm, db: Session = Depends(get_session)):
@@ -41,7 +42,7 @@ async def login(form_data: LoginForm, db: Session = Depends(get_session)):
     except HTTPException as http_exc: #Captura el user not found que levanta db_check_user
         raise http_exc
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Login failed due to an unexpected error.")
+        raise HTTPException(status_code=500, detail=f"Login failed due to an unexpected error {e}.")
     
     if db_res and bcrypt.checkpw(form_data.password.encode('utf-8'), db_res.pwd.encode('utf-8')):
         # Generate JWT token
