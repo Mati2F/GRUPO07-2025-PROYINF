@@ -4,7 +4,6 @@ from database.boletines import (
     db_delete_bol,
     db_get_bol,
     db_get_pdf,
-    db_get_pdf2
 )
 from database.models import Boletines, NotFoundError
 from database.database import get_session
@@ -38,7 +37,7 @@ def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
 #Obtener pdf boletin
 @router.get("/pdf/{id}", tags=["boletines"])
 def get_pdf(id: int, db: Session = Depends(get_session)):
-    pdf_content = db_get_pdf2(id, db)
+    pdf_content = db_get_pdf(id, db)
     return StreamingResponse(BytesIO(pdf_content), media_type="application/pdf")
 
 #Eliminar boletin
