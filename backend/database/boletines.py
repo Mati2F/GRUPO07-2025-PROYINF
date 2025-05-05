@@ -45,15 +45,8 @@ def db_get_bol(db: Session = Depends(get_session)):
     statement = db.exec(select(Boletines.id, Boletines.categoria, Boletines.fecha)).all()
     return statement
 
-#Extraer pdf segun id boletin
-def db_get_pdf(id:int, db: Session=Depends(get_session)):
-    statement = db.exect(
-        select(bolPdf.pdf)
-        .where(bolPdf.id == id))
-    return statement
-
 #Version para ver si funciona el visor de pdf
-def db_get_pdf2(id: int, db: Session):
+def db_get_pdf(id: int, db: Session):
     boletin = db.get(Boletines, id)
     if not boletin:
         raise HTTPException(status_code=404, detail="Boletín no encontrado")
