@@ -10,6 +10,9 @@ const port = process.env.PORT || 8081
 
 function Boletines() {
     const [images, setImages] = useState([])
+    const [allImages, setAllImages] = useState([]);
+    const [ordenRecientes, setOrdenRecientes] = useState(false);
+    
     const [Taimages, setTaImages] = useState([])
     const [resImages, setResImages] = useState("")
     const [filter, setFilter] = useState([])
@@ -21,11 +24,24 @@ function Boletines() {
             const res = await api.get("/bol");
             console.log(res)
             setImages(res.data);
+            setAllImages(res.data); 
             setTaImages(res.data);
         }catch(err){
             console.log(err)
         }
     }
+
+    const manejarOrdenRecientes = (e) => {
+        const checked = e.target.checked;
+        setOrdenRecientes(checked);
+    
+        if (checked) {
+            const ordenados = [...allImages].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            setImages(ordenados);
+        } else {
+            setImages(allImages); // volvemos al orden original
+        }
+    };  
 
     const handleLogout = async () => {
         try{
@@ -131,9 +147,14 @@ function Boletines() {
                     placeholder="Busqueda de categorias"
                     onChange={handleChange}
                 /> */}
-                <button>Recientes</button>
-                <button>Más Vistos</button>
-                <button>Rating</button>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={ordenRecientes}
+                        onChange={manejarOrdenRecientes}
+                    />
+                    Recientes
+                </label>
             </div>
 
 			<div className="boletin-container">
