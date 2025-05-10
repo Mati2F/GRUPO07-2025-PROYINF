@@ -134,51 +134,59 @@ function Boletines() {
             <section className="main-content">
                 <aside className="filters">
                     <h3>Boletines</h3>
+                    <ul>
+                        <li>Alimentos <input type="checkbox" /></li>
+                        <li>Berries <input type="checkbox" /></li>
+                        <li>Cambio climatico <input type="checkbox" /></li>
+                        <li>Apicultura <input type="checkbox" /></li>
+                        <li>Bionergia <input type="checkbox" /></li>
+                        <li>Catastrofes <input type="checkbox" /></li>
+                        <li>Clima calido <input type="checkbox" /></li>
+                        <li>Clima templado <input type="checkbox" /></li>
+                        <li>Clima helado <input type="checkbox" /></li>
+                        <li>Ovinos <input type="checkbox" /></li>
+                        <li>TIC's <input type="checkbox" /></li>
+                    </ul>
                         {/* {category.map((item) => <li>
                             <label>{item}</label>
                             <input type="checkbox" value={item} onChange={handleChangeCheckBox}/>
                         </li>)} */}
                 </aside>
                 <section className="boletines">
-            <div className="search-bar">
-                {/* <input 
-                    className="form-control inputBuscar"
-                    value={resImages}
-                    placeholder="Busqueda de categorias"
-                    onChange={handleChange}
-                /> */}
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={ordenRecientes}
-                        onChange={manejarOrdenRecientes}
-                    />
-                    Recientes
-                </label>
-            </div>
+                    <div className="search-bar">
+                        <input type="text" placeholder="Search" />
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={ordenRecientes}
+                                onChange={manejarOrdenRecientes}
+                            />
+                            Recientes
+                        </label>
+                        {/* <input 
+                            className="form-control inputBuscar"
+                            value={resImages}
+                            placeholder="Busqueda de categorias"
+                            onChange={handleChange}
+                        /> */}
+                    </div>
 
-			<div className="boletin-container">
-                <table className="table table-sm table-bordered">
-                <tr>
-                    <td>Boton?</td>
-                    <td>Categoria</td>
-                    <td>fecha</td>
-                </tr>
-                <tbody>
-                    {images &&
-                    images.map((ima) => (
-                        <tr key={ima.id}>
-                            <td>
-                                <Link to={`${ima.id}`} className='btn btn-primary'>Boletin {ima.id}</Link>
-                            </td>
-                            <td>{ima.categoria}</td>
-                            <td>{ima.fecha}</td>
-                        </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-        </section>
+                    <div className="grid-boletines">
+                        {images &&
+                            images.map((ima) => (
+                            <div key={ima.id} className="card">
+                                <img src="portada.png" alt={`Boletín ${ima.id}`} />
+                                <p>
+                                <Link to={`${ima.id}`} className="btn btn-primary">
+                                    Boletín {ima.id}
+                                </Link>
+                                </p>
+                                <p>{ima.categoria}</p>
+                                <p>{ima.fecha}</p>
+                            </div>
+                            ))}
+                        </div>
+                </section>
             </section>
 
             <footer>

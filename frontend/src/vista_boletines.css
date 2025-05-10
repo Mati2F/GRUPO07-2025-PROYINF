@@ -43,14 +43,37 @@ header {
 
 .main-content {
     display: flex;
+    align-items: flex-start;
+    width: 100%;
     padding: 20px;
+    box-sizing: border-box;
 }
+
+.grid-boletines {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+.card {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 
 .filters {
     width: 20%;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 10px;
+    margin-right: 20px;
 }
 
 .filters ul {
@@ -87,10 +110,17 @@ header {
     padding: 0 20px;
 }
 
+.borradores {
+    flex: 1;
+    gap: 20px;
+  }
+
 .boletin-container, .borrador-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .boletin-item, .borrador-item{
