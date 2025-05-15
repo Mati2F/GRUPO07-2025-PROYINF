@@ -154,7 +154,8 @@ function AllDrafts() {
                                         </Link>
                                         </p>
                                         <p>{ima.categoria}</p>
-                                        <p>{ima.fecha}</p>
+                                        <p>{ima.fechaCreacion}</p>
+                                        <p>{ima.fechaMod}</p>
                                     </div>
                                 ))}
                             </div>
