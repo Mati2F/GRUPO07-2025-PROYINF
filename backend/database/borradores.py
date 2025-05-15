@@ -43,7 +43,15 @@ async def db_create_draft(cat: int,file: UploadFile=File(...), db: Session = Dep
 #Obtener borradores
 def db_get_draft(db: Session = Depends(get_session)):
     statement = db.exec(select(Borradores.id, Borradores.categoria, Borradores.fechaCreacion, Borradores.fechaUltimaMod)).all()
-    return statement
+    return [
+        {
+            "id": row.id,
+            "categoria": row.categoria,
+            "fechaCreacion": row.fechaCreacion,
+            "fechaMod": row.fechaUltimaMod  # Asegúrate de que esto coincida
+        }
+        for row in statement
+    ]
 
 #Obtiene pdf borrador
 def db_get_pdf_draft(id: int, db: Session):

@@ -12,6 +12,10 @@ function AllDrafts() {
     const [role, setRole] = useState(false);
     const navigate = useNavigate();
 
+    const [images, setImages] = useState([])
+    const [allImages, setAllImages] = useState([]);
+    const [ordenRecientes, setOrdenRecientes] = useState(false);
+
     axios.defaults.withCredentials = true;
     
     const handleLogout = async () => {
@@ -22,6 +26,29 @@ function AllDrafts() {
             console.log(error);
         }
     }
+
+    const manejarOrdenRecientes = (e) => {
+        const checked = e.target.checked;
+        setOrdenRecientes(checked);
+    
+        if (checked) {
+            const ordenados = [...allImages].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            setImages(ordenados);
+        } else {
+            setImages(allImages); // volvemos al orden original
+        }
+    };  
+
+    const peticionGet = async () => {
+    try {
+        const res = await api.get("/draft");
+        console.log("Respuesta de /draft/:", res.data);
+        setImages(res.data);
+        setAllImages(res.data); 
+        } catch (err) {
+            console.log("Error al obtener borradores:", err);
+        }
+    };
     
     useEffect(()=>{
         const initUserData = async () => {
@@ -43,8 +70,9 @@ function AllDrafts() {
             }
         };
         initUserData();
+        peticionGet();
 
-    }, []); // Empty dependency array means this runs once on mount
+    }, []) // Empty dependency array means this runs once on mount
 
     const Pagina404 = () => {
         return (
@@ -84,9 +112,10 @@ function AllDrafts() {
                                     href="/">Cerrar sesion</button></li>
                         </ul>
                     </nav>
-                </header><section className="main-content">
+                </header>
+                    <section className="main-content">
                         <aside className="filters">
-                            <h3>Boletines</h3>
+                            <h3>Borradores</h3>
                             <ul>
                                 <li>Alimentos <input type="checkbox" /></li>
                                 <li>Berries <input type="checkbox" /></li>
@@ -105,16 +134,27 @@ function AllDrafts() {
                         <section className="borradores">
                             <div className="search-bar">
                                 <input type="text" placeholder="Search" />
-                                <button>Recientes</button>
-                                <button>Más Vistos</button>
-                                <button>Rating</button>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={ordenRecientes}
+                                        onChange={manejarOrdenRecientes}
+                                    />
+                                    Recientes
+                                </label>
                             </div>
-
-                            <div className="borrador-container">
-                                {[1, 2, 3, 4, 5, 6].map(num => (
-                                    <div className="borrador-item" key={num}>
-                                        <img className="boletin" src="/BoletinFia.jpg" alt={`Borrador ${num}`} />
-                                        <p>Borrador {num}</p>
+                            <div className="grid-boletines">
+                                {images &&
+                                    images.map((ima) => (
+                                    <div key={ima.id} className="card">
+                                        <img src="portada.png" alt={`Borrador ${ima.id}`} />
+                                        <p>
+                                        <Link to={`${ima.id}`} className="btn btn-primary">
+                                            Borrador {ima.id}
+                                        </Link>
+                                        </p>
+                                        <p>{ima.categoria}</p>
+                                        <p>{ima.fecha}</p>
                                     </div>
                                 ))}
                             </div>
