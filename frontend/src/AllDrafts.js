@@ -14,7 +14,8 @@ function AllDrafts() {
 
     const [images, setImages] = useState([])
     const [allImages, setAllImages] = useState([]);
-    const [ordenRecientes, setOrdenRecientes] = useState(false);
+    const [ordenRecientesCreacion, setOrdenRecientesCreacion] = useState(false);
+    const [ordenRecientesMod, setOrdenRecientesMod] = useState(false);
 
     axios.defaults.withCredentials = true;
     
@@ -27,12 +28,26 @@ function AllDrafts() {
         }
     }
 
-    const manejarOrdenRecientes = (e) => {
+    const manejarOrdenRecientesCreacion = (e) => {
         const checked = e.target.checked;
-        setOrdenRecientes(checked);
+        setOrdenRecientesCreacion(checked);
     
         if (checked) {
-            const ordenados = [...allImages].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            setOrdenRecientesMod(false);
+            const ordenados = [...allImages].sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+            setImages(ordenados);
+        } else {
+            setImages(allImages); // volvemos al orden original
+        }
+    };
+
+    const manejarOrdenRecientesMod = (e) => {
+        const checked = e.target.checked;
+        setOrdenRecientesMod(checked);
+    
+        if (checked) {
+            setOrdenRecientesCreacion(false);
+            const ordenados = [...allImages].sort((a, b) => new Date(b.fechaMod) - new Date(a.fechaMod));
             setImages(ordenados);
         } else {
             setImages(allImages); // volvemos al orden original
@@ -137,10 +152,18 @@ function AllDrafts() {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        checked={ordenRecientes}
-                                        onChange={manejarOrdenRecientes}
+                                        checked={ordenRecientesCreacion}
+                                        onChange={manejarOrdenRecientesCreacion}
                                     />
-                                    Recientes
+                                    Recientes por Creación
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={ordenRecientesMod}
+                                        onChange={manejarOrdenRecientesMod}
+                                    />
+                                    Recientes por Modificación
                                 </label>
                             </div>
                             <div className="grid-boletines">
