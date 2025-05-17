@@ -29,7 +29,7 @@ function App() {
           <Route path='/admin/update/:id' element={<UpdateUser/>}></Route>
           <Route path="/admin/create-newsletters" element={<CreateNewsletters />} />
           <Route path="/admin/all-drafts" element={<AllDrafts />}/>
-          <Route path="/admin/single-draft" element={<SingleDraft />} />          
+          <Route path="/admin/all-drafts/:id" element={<SingleDraft />} />          
         </Routes>
       </BrowserRouter>
     </div>

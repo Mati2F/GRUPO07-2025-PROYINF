@@ -170,7 +170,7 @@ function AllDrafts() {
                                 {images &&
                                     images.map((ima) => (
                                     <div key={ima.id} className="card">
-                                        <img src="portada.png" alt={`Borrador ${ima.id}`} />
+                                        <img src="/BoletinFia.jpg" alt={`Borrador ${ima.id}`} />
                                         <p>
                                         <Link to={`${ima.id}`} className="btn btn-primary">
                                             Borrador {ima.id}
