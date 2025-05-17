@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import api from './Api.js'
 import axios from 'axios'
 import './vista_boletines.css'
+import { useParams } from 'react-router-dom' 
 
 function ViewBoletin() {
   //`http://localhost:${port}/admin/update/`+id
   //La url debe estar con el id correspondiente del boletin pa verlo :3
     const [auth, setAuth] = useState(false);
+    const {id} = useParams();
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
@@ -41,7 +43,7 @@ function ViewBoletin() {
     };
 
     const handleVerPdf = () => {
-        window.open(`http://localhost:8000/bol/pdf/2`, '_blank')
+        window.open(`http://localhost:8000/bol/pdf/${id}`, '_blank');
     };
    
 
@@ -73,7 +75,7 @@ function ViewBoletin() {
                 <div className="borrador-card">
                     <img src={"/BoletinFia.jpg"} alt="Portada del Boletín" className="borrador-image" />
                     <button className="access-button" onClick={handleVerPdf}>Ver PDF</button>
-                    <button onClick={handleShare}>Compartir</button>
+                    <button className="btn btn-secondary" onClick={handleShare}>Compartir</button>
                 </div>
             </div>
         </section>

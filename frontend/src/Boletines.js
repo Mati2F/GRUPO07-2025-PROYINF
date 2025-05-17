@@ -175,14 +175,14 @@ function Boletines() {
                         {images &&
                             images.map((ima) => (
                             <div key={ima.id} className="card">
-                                <img src="portada.png" alt={`Boletín ${ima.id}`} />
+                                <img className="boletines" src="/BoletinFia.jpg" alt={`Boletín ${ima.id}`} />
                                 <p>
                                 <Link to={`${ima.id}`} className="btn btn-primary">
                                     Boletín {ima.id}
                                 </Link>
                                 </p>
-                                <p>{ima.categoria}</p>
-                                <p>{ima.fecha}</p>
+                                {/*<p>{ima.categoria}</p>
+                                <p>{ima.fecha}</p>*/}
                             </div>
                             ))}
                         </div>

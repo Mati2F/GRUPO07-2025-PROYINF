@@ -2,10 +2,13 @@ import React, {useEffect, useState} from 'react'
 import './individual_boletines.css';
 import api from './Api.js'
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
 function SingleDraft() {
 
     const [auth, setAuth] = useState(false);
+    const {id} = useParams();
+    
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
@@ -23,6 +26,23 @@ function SingleDraft() {
         fetchPermission();
     }})
 
+    /*useEffect(() => {
+    const fetchPermission = async () => {
+        try {
+            const res = await api.post('/admin/all-drafts');
+            if (res.data.Status === "Success") {
+                setAuth(true);
+            } else {
+                setAuth(false);
+            }
+        } catch (err) {
+            console.log(err);
+            setAuth(false); 
+        }
+    };
+    fetchPermission();
+    }, []);*/
+
     const Pagina404 = () => {
         return (
             <div>
@@ -35,6 +55,10 @@ function SingleDraft() {
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
+
+    const handleVerPdf = () => {
+        window.open(`http://localhost:8000/draft/${id}`, '_blank');
+    };
     return (
     <div>
     <header>
@@ -53,12 +77,13 @@ function SingleDraft() {
     </header>
 
     <section className="borrador-section">
-        <h1 className="borrador-title">Título Boletín Seleccionado</h1>
+        <h1 className="borrador-title">Boletin ${id}</h1>
         
         <div className="borrador-container">
             <div className="borrador-card">
                 <img src={"./BoletinFia.jpg"} alt="Portada del Boletín" className="borrador-image" />
-                <button className="access-button">Acceder</button>
+                
+                <button className="access-button" onClick={handleVerPdf}>Ver PDF</button>
             </div>
         </div>
     </section>
