@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import './vista_boletines.css';
+import './vista_boletines.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import api from './Api.js'
@@ -170,7 +170,7 @@ function AllDrafts() {
                                 {images &&
                                     images.map((ima) => (
                                     <div key={ima.id} className="card">
-                                        <img src="/BoletinFia.jpg" alt={`Borrador ${ima.id}`} />
+                                        <img className="borradorIMG" src="/BoletinFia.jpg" alt={`Borrador ${ima.id}`} />
                                         <p>
                                         <Link to={`${ima.id}`} className="btn btn-primary">
                                             Borrador {ima.id}

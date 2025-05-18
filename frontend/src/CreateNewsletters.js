@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import './creacion_boletines.css';
-/*import {Link} from 'react-router-dom'*/
 import AllDrafts from './AllDrafts';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
