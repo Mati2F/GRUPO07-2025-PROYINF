@@ -81,11 +81,11 @@ function Admin() {
                         {
                             user.map((data, i)=>(
                                 <tr key={i}>
-                                    <td>{data.UserID}</td>
-                                    <td>{data.Rol}</td>
-                                    <td>{data.Correo}</td>                                    
-                                    <td>{data.Nombre}</td>                                    
-                                    <td>{data.Apellidos}</td>
+                                    <td>{data.userId}</td>
+                                    <td>{data.rol}</td>
+                                    <td>{data.correo}</td>                                    
+                                    <td>{data.nombre}</td>                                    
+                                    <td>{data.apellidos}</td>
                                     <td>
                                         <Link to={`update/${data.UserID}`} className='btn btn-primary'>Editar</Link>
                                         <button className='btn btn-danger' onClick={e =>handleDelete(data.UserID)}>Eliminar</button>
