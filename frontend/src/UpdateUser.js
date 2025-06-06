@@ -33,7 +33,7 @@ export default function UpdateUser() {
     useEffect(()=>{
         const fetchPermission = async() => {
             try{
-                const res = await api.post('/admin/all-drafts');
+                const res = await api.get('/admin/all-drafts');
                 if(res.data.Status === "Success"){
                     setAuth(true)
                 } else {
@@ -41,9 +41,11 @@ export default function UpdateUser() {
                 }
             }catch(err){
                 console.log(err)
+                setAuth(false)
             }
+        }
         fetchPermission();
-    }})
+    }, []);
 
     const Pagina404 = () => {
         return (
