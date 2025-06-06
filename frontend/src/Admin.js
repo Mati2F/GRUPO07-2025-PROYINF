@@ -63,7 +63,7 @@ function Admin() {
         <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
             <div className='w-50 bg-white rounded p-3'>
                 <div>
-                    <li><a href="/admin/all-drafts" class="login-button">Ir a Borradores</a></li>
+                    <li><a href="/admin/all-drafts" className="login-button">Ir a Borradores</a></li>
                 </div>
                 <Link to='create' className='btn btn-success'>CREAR +</Link>
                 <table className='table'>
