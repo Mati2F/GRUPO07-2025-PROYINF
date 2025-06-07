@@ -34,7 +34,7 @@ async def create_bol(background_tasks: BackgroundTasks, categoria: int = Form(..
             schema = EmailFormat(
                 recipient= email['mail'],
                 subject= "Boletin VIGIFIA disponible",
-                body = "Hola"+ email['nombre']+" Hay un nuevo boletin en vigifia. Dirigete a [link pagina]"
+                body = "Hola "+ email['nombre']+"\nHay un nuevo boletin en vigifia. Dirigete a [link pagina]"
             )
             background_tasks.add_task(send_email, schema)
 

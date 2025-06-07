@@ -1,10 +1,11 @@
 from database.users import (
-    usersCreate, usersDelete, usersResponse, usersUpdate, usersMail,
+    usersCreate, usersDelete, usersResponse, usersUpdate, usersMail, usersBanned,
     db_create_users,
     db_delete_users,
     db_get_users,
     db_update_users,
-    db_get_mails
+    db_get_mails,
+    db_banned_users
 )
 from database.models import Users, NotFoundError
 from database.database import get_session
@@ -81,3 +82,11 @@ def delete_users(id: int, db: Session = Depends(get_session)):
     except NotFoundError as e:
         raise HTTPException(status_code=404) from e
     return {"message":f"users {id} eliminado correctamente"}
+
+@router.put("/ban/{id}", tags=["users"])
+def ban_users(id:int, users: usersBanned, db: Session = Depends(get_session))->usersBanned:
+    try:
+        db_comp = db_banned_users(id, users, db)
+    except NotFoundError as e:
+        raise HTTPException(status_code=404) from e
+    return db_comp
