@@ -28,6 +28,9 @@ class usersMail(BaseModel):
     nombre: str 
     mail: EmailStr
 
+class usersBanned(BaseModel):
+    banned: bool
+
 #Crear usuario
 def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
     hashed_password = bcrypt.hashpw(users.pwd.encode('utf-8'), bcrypt.gensalt())
@@ -81,3 +84,15 @@ def db_delete_users(id: int, db: Session = Depends(get_session)):
     db.delete(statement)
     db.commit()
     return {"message":f"users {id} eliminado correctamente"}
+
+def db_banned_users(id:int, users: usersBanned, db: Session = Depends(get_session)):
+    statement = db.get(Users,id)
+    if not statement:
+        raise HTTPException(status_code=404, detail="User not found")
+    data = users.dict(exclude_unset=True)
+    for key, value in data.items():
+        setattr(statement, key, value)
+    db.add(statement)
+    db.commit()
+    db.refresh(statement)
+    return statement
