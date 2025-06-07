@@ -13,6 +13,7 @@ class usersCreate(BaseModel):
     pwd: str
     nombre: str
     apellidos: str
+    suscribed: bool
 
 class LoginForm(BaseModel):
     email: str
@@ -22,10 +23,11 @@ class LoginForm(BaseModel):
 def db_check_user(data: LoginForm, db: Session = Depends(get_session)):
     # Query to get the user by email only
     user = db.exec(select(Users).where(Users.correo == data.email)).first()
-    
     # Check if user exists
     if not user:
         raise HTTPException(status_code=404, detail="No record found. Please check your email")
+    if user.banned:
+        raise HTTPException(status_code=403, detail="You are banned.")
 
     # Verify the password against the hashed password in the database
     if not bcrypt.checkpw(data.password.encode('utf-8'), user.pwd.encode('utf-8')):

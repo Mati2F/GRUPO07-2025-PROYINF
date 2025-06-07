@@ -22,6 +22,8 @@ class Users(SQLModel, table=True):
     pwd: str = Field(sa_type =String(60))
     nombre: str = Field(sa_type =String(50))
     apellidos: str = Field(sa_type =String(255))
+    suscribed: bool
+    banned: bool | None = False
 
 class Boletines(SQLModel, table=True):
     __tablename__ = "boletines"

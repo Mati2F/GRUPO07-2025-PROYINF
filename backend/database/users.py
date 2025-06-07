@@ -12,6 +12,7 @@ class usersCreate(BaseModel):
     pwd: str
     nombre: str
     apellidos: str
+    suscribed: bool
 
 class usersResponse(BaseModel):
     id: int
@@ -23,6 +24,10 @@ class usersUpdate(BaseModel):
 class usersDelete(BaseModel):
     id: int
 
+class usersMail(BaseModel):
+    nombre: str 
+    mail: EmailStr
+
 #Crear usuario
 def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
     hashed_password = bcrypt.hashpw(users.pwd.encode('utf-8'), bcrypt.gensalt())
@@ -31,7 +36,8 @@ def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
         correo=users.correo,
         pwd=hashed_password,
         nombre=users.nombre,
-        apellidos=users.apellidos
+        apellidos=users.apellidos,
+        suscribed=users.suscribed
     )
     db.add(statement)
     db.commit()
@@ -44,11 +50,21 @@ def db_get_users(db: Session = Depends(get_session)):
     statement = db.exec(select(Users)).all()
     return statement
 
+#Obtener lista de emails de usuarios suscritos
+def db_get_mails(db: Session = Depends(get_session)):
+    statement = db.exec(select(Users.nombre, Users.correo).where(Users.suscribed == True)).all()
+    return [
+        {
+            "nombre": row.nombre,
+            "mail": row.correo,
+        }
+        for row in statement
+    ]
 #Actualizar usuarios
 def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_session)):
     statement = db.get(users,id)
     if not statement:
-        raise HTTPException(status_code=404, detail="statement not found")
+        raise HTTPException(status_code=404, detail="User not found")
     data = users.dict(exclude_unset=True)
     for key, value in data.items():
         setattr(statement, key, value)
@@ -61,7 +77,7 @@ def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_sessio
 def db_delete_users(id: int, db: Session = Depends(get_session)):
     statement = db.get(Users, id)
     if not statement:
-        raise HTTPException(status_code=404, detail="Flow State not found")
+        raise HTTPException(status_code=404, detail="User not found")
     db.delete(statement)
     db.commit()
     return {"message":f"users {id} eliminado correctamente"}

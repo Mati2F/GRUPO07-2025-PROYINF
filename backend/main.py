@@ -9,6 +9,7 @@ from database.login import db_check_user
 from routers.users import router as users_router
 from routers.boletines import router as boletines_router
 from routers.borradores import router as drafts_router
+from routers.mail import router as mail_router
 import uvicorn
 import bcrypt
 import jwt
@@ -34,6 +35,7 @@ app.add_middleware(
 app.include_router(users_router)
 app.include_router(boletines_router)
 app.include_router(drafts_router)
+app.include_router(mail_router)
 
 @app.post("/login")
 async def login(form_data: LoginForm, db: Session = Depends(get_session)):
