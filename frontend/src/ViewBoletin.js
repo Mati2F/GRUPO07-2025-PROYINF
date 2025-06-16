@@ -17,6 +17,7 @@ function ViewBoletin() {
                 const res = await api.get('/admin/all-drafts');
                 if(res.data.Status === "Success"){
                     setAuth(true)
+                    console.log(auth)
                 } else {
                     setAuth(false)
                 }
@@ -47,9 +48,6 @@ function ViewBoletin() {
     };
    
 
-    if (!auth) {
-        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
-    }
 
     return (
         <div>

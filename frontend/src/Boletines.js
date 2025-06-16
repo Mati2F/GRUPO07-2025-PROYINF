@@ -3,7 +3,6 @@ import api from './Api.js'
 import { useNavigate, Link } from 'react-router-dom';
 import './vista_boletines.css'
 
-
 function Boletines() {
     const [auth, setAuth] = useState(false);
     const [role, setRole] = useState(false);
@@ -70,6 +69,7 @@ function Boletines() {
                     if(res.data.role === 1){
                         setRole(true) 
                     }
+                    console.log(auth)
                     setRoleInt(res.data.role)
                 } else {
                     setAuth(false)
@@ -85,9 +85,7 @@ function Boletines() {
         
     }, [])
 
-    if (!auth) {
-        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
-    }
+
     return (
     <div>
             <header>

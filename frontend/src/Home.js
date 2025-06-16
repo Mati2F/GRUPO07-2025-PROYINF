@@ -3,14 +3,7 @@ import './inicio.css'
 import axios from 'axios'
 import api from './Api.js'
 
-const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página que buscas no existe.</p>
-            </div>
-        );
-    };
+
 
 function Home() {
     const [auth,setAuth] = useState(false);
@@ -33,10 +26,6 @@ function Home() {
     }
     })
     
-     if (!auth) {
-        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
-    }
-    
     return (
         <body>
         <div>
@@ -50,8 +39,6 @@ function Home() {
                     <div className="logo"></div>
                     <ul className="nav-menu">
                         <li><a href="/Boletines">Boletines</a></li>
-                        <li><a href="/">Solutions</a></li>
-                        <li><a href="/">Contact</a></li>
                         <li><a href="/Login" className="login-button">Inicia sesión</a></li>
                     </ul>
                 </nav>
