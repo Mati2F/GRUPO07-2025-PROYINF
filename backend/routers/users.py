@@ -1,5 +1,5 @@
 from database.users import (
-    usersCreate, usersDelete, usersResponse, usersUpdate, usersMail, usersBanned,
+    UsersCreate, UsersDelete, UsersResponse, UsersUpdate, UsersMail, UsersBanned,
     db_create_users,
     db_delete_users,
     db_get_users,
@@ -39,7 +39,7 @@ async def admin_all_drafts(user: dict = Depends(verify_user)):
 
 #Create user
 @router.post("/create", response_model = Users, tags=["users"])
-def create_users(users: usersCreate, db: Session = Depends(get_session))->Users:
+def create_users(users: UsersCreate, db: Session = Depends(get_session))->Users:
     try:
         db_comp = db_create_users(users, db)
     except NotFoundError as e:
@@ -57,7 +57,7 @@ def get_users(db: Session = Depends(get_session))->list[Users]:
 
 #Show list of suscribed users mails
 @router.get("/mails", tags=["users"])
-def get_users(db: Session = Depends(get_session))->list[usersMail]:
+def get_users(db: Session = Depends(get_session))->list[UsersMail]:
     try:
         db_comp = db_get_mails(db)
     except NotFoundError as e:
@@ -66,7 +66,7 @@ def get_users(db: Session = Depends(get_session))->list[usersMail]:
 
 #Actualizar usuario
 @router.put("/update/{id}", tags=["users"])
-def update_users(id:int, users: usersUpdate, db: Session = Depends(get_session))->usersUpdate:
+def update_users(id:int, users: UsersUpdate, db: Session = Depends(get_session))->UsersUpdate:
     try:
         db_comp = db_update_users(id, users, db)
     except NotFoundError as e:
@@ -84,7 +84,7 @@ def delete_users(id: int, db: Session = Depends(get_session)):
     return {"message":f"users {id} eliminado correctamente"}
 
 @router.put("/ban/{id}", tags=["users"])
-def ban_users(id:int, users: usersBanned, db: Session = Depends(get_session))->usersBanned:
+def ban_users(id:int, users: UsersBanned, db: Session = Depends(get_session))->UsersBanned:
     try:
         db_comp = db_banned_users(id, users, db)
     except NotFoundError as e:

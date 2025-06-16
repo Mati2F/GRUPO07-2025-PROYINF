@@ -11,14 +11,14 @@ from datetime import datetime, date
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 
-class bolPdf(BaseModel):
+class BolPdf(BaseModel):
     pdf: bytes
     id: int
-class bolResponse(BaseModel):
+class BolResponse(BaseModel):
     id: int
     categoria: int
     fecha: datetime
-class bolDelete(BaseModel):
+class BolDelete(BaseModel):
     id: int
 
 

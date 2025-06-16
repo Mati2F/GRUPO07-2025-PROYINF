@@ -6,7 +6,7 @@ from fastapi import  HTTPException, Depends
 from .models import Users
 from .database import Session, get_session
 import bcrypt
-class usersCreate(BaseModel):
+class UsersCreate(BaseModel):
     rol: int
     correo: EmailStr
     pwd: str
@@ -14,25 +14,27 @@ class usersCreate(BaseModel):
     apellidos: str
     suscribed: bool
 
-class usersResponse(BaseModel):
+class UsersResponse(BaseModel):
     id: int
     nombre: str
 
-class usersUpdate(BaseModel):
+class UsersUpdate(BaseModel):
     nombre: str
 
-class usersDelete(BaseModel):
+class UsersDelete(BaseModel):
     id: int
 
-class usersMail(BaseModel):
+class UsersMail(BaseModel):
     nombre: str 
     mail: EmailStr
 
-class usersBanned(BaseModel):
+class UsersBanned(BaseModel):
     banned: bool
 
+NOTFOUND = "User not found"
+
 #Crear usuario
-def db_create_users(users: usersCreate, db: Session = Depends(get_session)):
+def db_create_users(users: UsersCreate, db: Session = Depends(get_session)):
     hashed_password = bcrypt.hashpw(users.pwd.encode('utf-8'), bcrypt.gensalt())
     statement = Users(
         rol=users.rol,
@@ -64,10 +66,10 @@ def db_get_mails(db: Session = Depends(get_session)):
         for row in statement
     ]
 #Actualizar usuarios
-def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_session)):
+def db_update_users(id:int, users: UsersUpdate, db: Session = Depends(get_session)):
     statement = db.get(users,id)
     if not statement:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     data = users.dict(exclude_unset=True)
     for key, value in data.items():
         setattr(statement, key, value)
@@ -80,15 +82,15 @@ def db_update_users(id:int, users: usersUpdate, db: Session = Depends(get_sessio
 def db_delete_users(id: int, db: Session = Depends(get_session)):
     statement = db.get(Users, id)
     if not statement:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     db.delete(statement)
     db.commit()
     return {"message":f"users {id} eliminado correctamente"}
 
-def db_banned_users(id:int, users: usersBanned, db: Session = Depends(get_session)):
+def db_banned_users(id:int, users: UsersBanned, db: Session = Depends(get_session)):
     statement = db.get(Users,id)
     if not statement:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     data = users.dict(exclude_unset=True)
     for key, value in data.items():
         setattr(statement, key, value)

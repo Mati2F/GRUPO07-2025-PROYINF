@@ -1,5 +1,5 @@
 from database.boletines import (
-    bolDelete, bolResponse,
+    BolDelete, BolResponse,
     db_create_bol,
     db_delete_bol,
     db_get_bol,
@@ -25,7 +25,7 @@ router = APIRouter(
 
 #Create boletin
 @router.post("/",  tags=["boletines"])
-async def create_bol(background_tasks: BackgroundTasks, categoria: int = Form(...),file: UploadFile = File(...), db: Session = Depends(get_session))->bolResponse:
+async def create_bol(background_tasks: BackgroundTasks, categoria: int = Form(...),file: UploadFile = File(...), db: Session = Depends(get_session))->BolResponse:
     try:
         db_comp = await db_create_bol(categoria, file, db)
         recipients = db_get_mails(db)
@@ -44,7 +44,7 @@ async def create_bol(background_tasks: BackgroundTasks, categoria: int = Form(..
 
 #Get display boletines
 @router.get("/", tags=["boletines"])
-def get_bol(db: Session = Depends(get_session))->list[bolResponse]:
+def get_bol(db: Session = Depends(get_session))->list[BolResponse]:
     try:
         db_comp = db_get_bol(db)
     except NotFoundError as e:
@@ -61,7 +61,7 @@ def get_pdf(id: int, db: Session = Depends(get_session)):
 @router.delete("/{id}", tags=["boletines"])
 def delete_bol(id: int, db: Session = Depends(get_session)):
     try:
-        db_comp = db_delete_bol(id, db)
+        db_delete_bol(id, db)
     except NotFoundError as e:
         raise HTTPException(status_code=404) from e
     return {"message":f"boletin {id} eliminado correctamente"}

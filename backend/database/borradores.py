@@ -11,20 +11,21 @@ from datetime import datetime, date
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 
-class draftPdf(BaseModel):
+class DraftPdf(BaseModel):
     pdf: bytes
     id: int
 
-class draftResponse(BaseModel):
+class DraftResponse(BaseModel):
     id: int
     categoria: int
     fechaCreacion: datetime
     fechaMod: datetime
 
 
-class draftDelete(BaseModel):
+class DraftDelete(BaseModel):
     id: int
 
+NOTFOUND = "borrador not found"
 
 #Crea borrador
 async def db_create_draft(cat: int,file: UploadFile=File(...), db: Session = Depends(get_session)):
@@ -57,14 +58,14 @@ def db_get_draft(db: Session = Depends(get_session)):
 def db_get_pdf_draft(id: int, db: Session):
     draft = db.get(Borradores, id)
     if not draft:
-        raise HTTPException(status_code=404, detail="borrador no encontrado")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     return draft.pdf
 
 #Actualizar borrador
 async def db_update_draft(id:int, file: UploadFile=File(...), db: Session = Depends(get_session)):
     statement = db.get(Borradores,id)
     if not statement:
-        raise HTTPException(status_code=404, detail="borrador not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     pdf_content = await file.read()
     statement.pdf = pdf_content
     statement.fechaUltimaMod = datetime.now()
@@ -77,7 +78,7 @@ async def db_update_draft(id:int, file: UploadFile=File(...), db: Session = Depe
 def db_delete_draft(id: int, db: Session = Depends(get_session)):
     statement = db.get(Borradores, id)
     if not statement:
-        raise HTTPException(status_code=404, detail="borrador not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     db.delete(statement)
     db.commit()
     return {"message":f"borrador {id} eliminado correctamente"}
@@ -86,7 +87,7 @@ def db_delete_draft(id: int, db: Session = Depends(get_session)):
 def db_publish_draft(id: int, db: Session = Depends(get_session)):
     statement = db.get(Borradores, id) #Obtiene borrador
     if not statement:
-        raise HTTPException(status_code=404, detail="borrador not found")
+        raise HTTPException(status_code=404, detail=NOTFOUND)
     #Inserta en boletines el borrador
     boletin = Boletines(categoria=statement.categoria,fecha=datetime.now(),pdf=statement.pdf)
     try:
@@ -95,5 +96,5 @@ def db_publish_draft(id: int, db: Session = Depends(get_session)):
         db.delete(statement)
         db.commit()
     except Exception as e:
-        raise Exception
+        print(e)
     return boletin

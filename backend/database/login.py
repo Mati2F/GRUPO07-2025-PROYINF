@@ -7,7 +7,7 @@ from .models import Users
 from .database import Session, get_session
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import bcrypt
-class usersCreate(BaseModel):
+class UsersCreate(BaseModel):
     rol: int
     correo: EmailStr
     pwd: str

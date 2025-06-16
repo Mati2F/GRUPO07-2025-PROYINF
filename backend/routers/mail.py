@@ -1,5 +1,5 @@
 from database.users import (
-    usersCreate, usersDelete, usersResponse, usersUpdate, usersMail,
+    UsersCreate, UsersDelete, UsersResponse, UsersUpdate, UsersMail,
     db_get_mails
 )
 from database.mail import (
