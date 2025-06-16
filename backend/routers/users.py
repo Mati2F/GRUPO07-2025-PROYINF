@@ -78,7 +78,7 @@ def update_users(id:int, users: UsersUpdate, db: Session = Depends(get_session))
 @router.delete("/{id}", tags=["users"])
 def delete_users(id: int, db: Session = Depends(get_session)):
     try:
-        db_comp = db_delete_users(id, db)
+        db_delete_users(id, db)
     except NotFoundError as e:
         raise HTTPException(status_code=404) from e
     return {"message":f"users {id} eliminado correctamente"}
