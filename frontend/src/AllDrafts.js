@@ -15,7 +15,6 @@ const Pagina404 = () => {
 
 function AllDrafts() {
     const [auth, setAuth] = useState(false);
-    const [,setMessage] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState(false);
     const navigate = useNavigate();
@@ -86,7 +85,7 @@ function AllDrafts() {
                     
                 } else {
                     setAuth(false)
-                    setMessage(res.data.error)
+                    console.log(res.data.error)
                 }
             } catch (error) {
                 console.log(error);

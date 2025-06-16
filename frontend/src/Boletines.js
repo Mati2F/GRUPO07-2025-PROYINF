@@ -8,13 +8,12 @@ function Boletines() {
     const [auth, setAuth] = useState(false);
     const [role, setRole] = useState(false);
     const [images, setImages] = useState([]);
-    const [,setMessage] = useState('');
     const [roleInt, setInt] = useState(0);
     const [allImages, setAllImages] = useState([]);
     const [ordenRecientes, setOrdenRecientes] = useState(false);
     const [name, setName] = useState('');
-    const [, setTaImages] = useState([])
-    const [, setCategory] = useState([])
+    const [Taimages, setTaImages] = useState([])
+    const [category, setCategory] = useState([])
     const navigate = useNavigate();
 
     const peticionGet = async() => {
@@ -24,6 +23,8 @@ function Boletines() {
             setImages(res.data);
             setAllImages(res.data); 
             setTaImages(res.data);
+            console.log(Taimages)
+            console.log(category)
         }catch(err){
             console.log(err)
         }
@@ -72,7 +73,7 @@ function Boletines() {
                     setInt(res.data.role)
                 } else {
                     setAuth(false)
-                    setMessage(res.data.error)
+                    console.log(res.data.error)
                 }
             } catch (error) {
                 console.log(error);
