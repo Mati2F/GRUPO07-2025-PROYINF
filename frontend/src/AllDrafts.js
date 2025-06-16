@@ -15,7 +15,7 @@ const Pagina404 = () => {
 
 function AllDrafts() {
     const [auth, setAuth] = useState(false);
-    const [,setMessage] = useState(''); //const [message, setMessage] = useState('');
+    const [,setMessage] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState(false);
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function AllDrafts() {
     
     const handleLogout = async () => {
         try{
-            await api.get('/logout'); //const res = await api.get('/logout');
+            await api.get('/logout');
             navigate('/');
         }catch (error){
             console.log(error);
@@ -119,7 +119,6 @@ function AllDrafts() {
                                 <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li>
                                 :
                                 <li>Hola {name}! </li>}
-                            <li>VIGIFIA</li>
                             <li><a href="/admin/all-drafts">Borradores</a></li>
                             <li><a href="/admin/create-newsletters">Creación</a></li>
                             <li><a href="/boletines">Boletines</a></li>
@@ -155,16 +154,12 @@ function AllDrafts() {
                                     <input
                                         type="checkbox"
                                         checked={ordenRecientesCreacion}
-                                        onChange={manejarOrdenRecientesCreacion}/>
-                                    Recientes por Creación
-                                </label>
+                                        onChange={manejarOrdenRecientesCreacion}/> Recientes por Creación</label>
                                 <label>
                                     <input
                                         type="checkbox"
                                         checked={ordenRecientesMod}
-                                        onChange={manejarOrdenRecientesMod}/>
-                                    Recientes por Modificación
-                                </label>
+                                        onChange={manejarOrdenRecientesMod}/>Recientes por Modificación</label>
                             </div>
                             <div className="grid-boletines">
                                 {images?.map((ima) => (

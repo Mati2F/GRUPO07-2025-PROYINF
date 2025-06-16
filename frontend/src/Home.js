@@ -3,8 +3,17 @@ import './inicio.css'
 import axios from 'axios'
 import api from './Api.js'
 
+const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+
 function Home() {
-    const [, setAuth] = useState(false);
+    const [auth,setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
@@ -23,6 +32,10 @@ function Home() {
         fetchPermission();
     }
     })
+    
+     if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
+    }
     
     return (
         <body>

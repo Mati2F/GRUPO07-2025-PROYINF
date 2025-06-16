@@ -47,6 +47,10 @@ function ViewBoletin() {
     };
    
 
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
+    }
+
     return (
         <div>
         <header>

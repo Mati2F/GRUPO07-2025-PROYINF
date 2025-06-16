@@ -8,7 +8,8 @@ function Boletines() {
     const [auth, setAuth] = useState(false);
     const [role, setRole] = useState(false);
     const [images, setImages] = useState([]);
-     const [,setMessage] = useState('');
+    const [,setMessage] = useState('');
+    const [roleInt, setInt] = useState(0);
     const [allImages, setAllImages] = useState([]);
     const [ordenRecientes, setOrdenRecientes] = useState(false);
     const [name, setName] = useState('');
@@ -42,7 +43,7 @@ function Boletines() {
 
     const handleLogout = async () => {
         try{
-            const res = await api.get('/logout');
+            await api.get('/logout');
             navigate('/');
         }catch (error){
             console.log(error);
@@ -68,7 +69,7 @@ function Boletines() {
                     if(res.data.role === 1){
                         setRole(true) 
                     }
-                    
+                    setInt(res.data.role)
                 } else {
                     setAuth(false)
                     setMessage(res.data.error)
@@ -83,7 +84,9 @@ function Boletines() {
         
     }, [])
 
-
+    if (!auth) {
+        return <Pagina404 />; // Renderiza la página 404 si no está autenticado
+    }
     return (
     <div>
             <header>
@@ -95,18 +98,12 @@ function Boletines() {
                 <nav>
                     <div className="logo"></div>
                     <ul className="nav-menu">
-                        {role ?
-                                <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li>
-                                :
-                                (name != '') ?
-                                <li>Hola {name}! </li>
-                            : <li></li>}
+                        {role && <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li>}
+                        {!role && name !== '' && <li>Hola {name}!</li>}
+                        {!role && name === '' && <li></li>}
                         <li><a href="/Boletines">Boletines</a></li>
-                        {(role != 0) ?
-                            <li><a href="admin/all-drafts">Borradores</a></li>
-                            :
-                            <li></li> 
-                        }
+                        
+                        {(roleInt != 0) && <li><a href="admin/all-drafts">Borradores</a></li>}
                         {(name!='')? <li className="nav-item">
                                 <button onClick={handleLogout}
                                     className="nav-link-outline-0 border-0 bg-red text-prima"
@@ -141,9 +138,7 @@ function Boletines() {
                             <input
                                 type="checkbox"
                                 checked={ordenRecientes}
-                                onChange={manejarOrdenRecientes}/>
-                            Recientes
-                        </label>
+                                onChange={manejarOrdenRecientes}/>Recientes</label>
                     </div>
 
                     <div className="grid-boletines">
