@@ -8,11 +8,11 @@ function Boletines() {
     const [auth, setAuth] = useState(false);
     const [role, setRole] = useState(false);
     const [images, setImages] = useState([]);
-    const [roleInt, setInt] = useState(0);
+    const [roleInt, setRoleInt] = useState(0);
     const [allImages, setAllImages] = useState([]);
     const [ordenRecientes, setOrdenRecientes] = useState(false);
     const [name, setName] = useState('');
-    const [Taimages, setTaImages] = useState([])
+    const [taimages, setTaimages] = useState([])
     const [category, setCategory] = useState([])
     const navigate = useNavigate();
 
@@ -22,8 +22,8 @@ function Boletines() {
             console.log(res)
             setImages(res.data);
             setAllImages(res.data); 
-            setTaImages(res.data);
-            console.log(Taimages)
+            setTaimages(res.data);
+            console.log(taimages)
             console.log(category)
         }catch(err){
             console.log(err)
@@ -70,7 +70,7 @@ function Boletines() {
                     if(res.data.role === 1){
                         setRole(true) 
                     }
-                    setInt(res.data.role)
+                    setRoleInt(res.data.role)
                 } else {
                     setAuth(false)
                     console.log(res.data.error)
