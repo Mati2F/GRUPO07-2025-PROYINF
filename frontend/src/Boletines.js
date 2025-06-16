@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import api from './Api.js'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './vista_boletines.css'
-import {Link} from 'react-router-dom'
 
-
-const port = process.env.PORT || 8081
 
 function Boletines() {
-    const [images, setImages] = useState([])
+    const [auth, setAuth] = useState(false);
+    const [role, setRole] = useState(false);
+    const [images, setImages] = useState([]);
+     const [,setMessage] = useState('');
     const [allImages, setAllImages] = useState([]);
     const [ordenRecientes, setOrdenRecientes] = useState(false);
-    
-    const [Taimages, setTaImages] = useState([])
-    const [resImages, setResImages] = useState("")
-    const [filter, setFilter] = useState([])
-    const [category, setCategory] = useState([])
+    const [name, setName] = useState('');
+    const [, setTaImages] = useState([])
+    const [, setCategory] = useState([])
     const navigate = useNavigate();
 
     const peticionGet = async() => {
@@ -51,6 +48,7 @@ function Boletines() {
             console.log(error);
         }
     }
+
     const categoryGet = async() => {
         try{
             const res = await api.get('/categorias');
@@ -61,56 +59,30 @@ function Boletines() {
     }
 
     useEffect(() => {
+        const initUserData = async () => {
+            try {
+                const res = await api.get('/admin/all-drafts');
+                if(res.data.Status === "Success"){
+                    setAuth(true)
+                    setName(res.data.name)
+                    if(res.data.role === 1){
+                        setRole(true) 
+                    }
+                    
+                } else {
+                    setAuth(false)
+                    setMessage(res.data.error)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        initUserData();
         peticionGet();
         categoryGet();
         
     }, [])
 
-    const handleChange = e => {
-        setResImages(e.target.value);
-        filtrar(e.target.value);
-    }
-
-    const filtrar = (filtro) => {
-        var resultado = Taimages.filter((elemento) =>{
-        if(elemento.categorias.toString().toLowerCase().includes(filtro.toLowerCase())) {return elemento;}
-        return null;
-        });
-        setImages(resultado);
-    }
-
-    const handleChangeCheckBox = e => {
-        var update = Taimages.filter((fp) => {
-            if(fp.categorias.toString().toLowerCase().includes(e.target.value.toLowerCase())) {return fp;}
-            return null;
-        });
-        if(e.target.checked){
-            let filtro = filter.concat(update)
-            filtro.sort(function (a, b) {
-                if(a.id > b.id) return 1
-                if(a.id < b.id) return -1
-                return 0
-            })
-            console.log(filtro);
-            setFilter(filtro);
-            setImages(filtro);
-        }
-        else{
-            const duplicado = []
-            filter.forEach((element) => {
-                if(element.categorias !== e.target.value) duplicado.push(element);
-            })
-            setFilter(duplicado);
-            setImages(duplicado);
-            if(duplicado.length === 0) setImages(Taimages)
-        }
-        /*
-        if(e.target.checked){
-            setResImages(resImages + update)
-        } else {
-            setImages([...resImages.filter(fp => fp.categorias === e.target.value)])
-        }*/
-    }
 
     return (
     <div>
@@ -123,10 +95,24 @@ function Boletines() {
                 <nav>
                     <div className="logo"></div>
                     <ul className="nav-menu">
+                        {role ?
+                                <li><a href="/admin" className="login-button">Ir a Modo Administrador</a></li>
+                                :
+                                (name != '') ?
+                                <li>Hola {name}! </li>
+                            : <li></li>}
                         <li><a href="/Boletines">Boletines</a></li>
-                        <li><a href="/">Solutions</a></li>
-                        <li><a href="/">Contact</a></li>
-                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
+                        {(role != 0) ?
+                            <li><a href="admin/all-drafts">Borradores</a></li>
+                            :
+                            <li></li> 
+                        }
+                        {(name!='')? <li className="nav-item">
+                                <button onClick={handleLogout}
+                                    className="nav-link-outline-0 border-0 bg-red text-prima"
+                                    href="/">Cerrar sesion</button></li>
+                                    :
+                                    <li><a href="/Login" className="login-button">Inicia sesión</a></li>}
                     </ul>
                 </nav>
             </header>
@@ -147,10 +133,6 @@ function Boletines() {
                         <li>Ovinos <input type="checkbox" /></li>
                         <li>TIC's <input type="checkbox" /></li>
                     </ul>
-                        {/* {category.map((item) => <li>
-                            <label>{item}</label>
-                            <input type="checkbox" value={item} onChange={handleChangeCheckBox}/>
-                        </li>)} */}
                 </aside>
                 <section className="boletines">
                     <div className="search-bar">
@@ -159,21 +141,13 @@ function Boletines() {
                             <input
                                 type="checkbox"
                                 checked={ordenRecientes}
-                                onChange={manejarOrdenRecientes}
-                            />
+                                onChange={manejarOrdenRecientes}/>
                             Recientes
                         </label>
-                        {/* <input 
-                            className="form-control inputBuscar"
-                            value={resImages}
-                            placeholder="Busqueda de categorias"
-                            onChange={handleChange}
-                        /> */}
                     </div>
 
                     <div className="grid-boletines">
-                        {images &&
-                            images.map((ima) => (
+                        {images?.map((ima) => (
                             <div key={ima.id} className="card">
                                 <img className="boletinesIMG" src="/BoletinFia.jpg" alt={`Boletín ${ima.id}`} />
                                 <p>
@@ -181,8 +155,6 @@ function Boletines() {
                                     Boletín {ima.id}
                                 </Link>
                                 </p>
-                                {/*<p>{ima.categoria}</p>
-                                <p>{ima.fecha}</p>*/}
                             </div>
                             ))}
                         </div>

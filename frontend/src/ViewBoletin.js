@@ -50,26 +50,20 @@ function ViewBoletin() {
     return (
         <div>
         <header>
-            <div class="header-container">
-                <img src= "./logo.png" alt="Logo FIA" class="logo"/>
+            <div className="header-container">
+                <a href="/">
+                            <img src="/minagri.png" alt="Logo" className="logo" />
+                </a>
                 <nav>
-                    <ul class="nav-menu">
-                        <li><a href="/Boletines">Boletines</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Contact</a></li>
-                        {auth ? 
-                        <li><a href="/admin/all-drafts" className="login-button">Borradores</a></li> 
-                        : 
-                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
-                        }
-                                
+                    <ul className="nav-menu">
+                        <li><a href="/Boletines">Boletines</a></li>     
                     </ul>
                 </nav>
             </div>
         </header>
 
         <section className="borrador-section">
-            <h1 className="borrador-title">Título Boletín Seleccionado</h1>
+            <h1 className="borrador-title">Boletin {id}</h1>
             
             <div className="borrador-container">
                 <div className="borrador-card">
@@ -101,19 +95,19 @@ function ViewBoletin() {
                         <h4>Redes sociales</h4>
                         <p>
                             <a href="https://twitter.com/FIA_Chile">
-                                <img className = "iconoX" src = "/iconos/X.png"></img>
+                                <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                             </a>
                             <a href="https://www.instagram.com/fia_chile/">
-                                <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                             </a>
                             <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                                <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                             </a>
                             <a href="https://www.linkedin.com/company/fiachile">
-                                <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                             </a>
                             <a href="https://www.facebook.com/OpiaChile/">
-                                <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                             </a>
                         </p>
                     </div>

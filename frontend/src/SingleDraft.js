@@ -2,9 +2,17 @@ import React, {useEffect, useState} from 'react'
 import './individual_boletines.css';
 import api from './Api.js'
 import axios from 'axios'
-import { useParams, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
+const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página borrador que buscas no existe.</p>
+            </div>
+        );
+    };
+    
 function SingleDraft() {
 
     const [auth, setAuth] = useState(false);
@@ -13,7 +21,7 @@ function SingleDraft() {
     const navigate = useNavigate();
     const handleLogout = async() => {
         try{
-            const res = await api.get('/logout');
+            await api.get('/logout');
             navigate('/')
         }catch(err){
             console.log(err)
@@ -40,16 +48,6 @@ function SingleDraft() {
     fetchPermission();
     });
 
-
-    const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página borrador que buscas no existe.</p>
-            </div>
-        );
-    };
-    
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
@@ -72,8 +70,8 @@ function SingleDraft() {
                             <li><a href="/admin/create-newsletters">Creación</a></li>
                             <li className="nav-item">
                                 <button onClick={handleLogout}
-                                className="nav-link-outline-0 border-0 bg-red text-prima"  class="login-button"
-                                href="/">Cerrar sesion</button></li>
+                                className="nav-link-outline-0 border-0 bg-red text-prima"  
+                                href="/">Cerrar sesion</button></li>{/*class="login-button" */}
                         </ul>
                     </nav>
                 </header>
@@ -112,19 +110,19 @@ function SingleDraft() {
                     <h4>Redes sociales</h4>
                     <p>
                         <a href="https://twitter.com/FIA_Chile">
-                            <img className = "iconoX" src = "/iconos/X.png"></img>
+                            <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                         </a>
-                         <a href="https://www.instagram.com/fia_chile/">
-                            <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                        <a href="https://www.instagram.com/fia_chile/">
+                            <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                         </a>
-                         <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                            <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                        <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
+                            <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                         </a>
-                         <a href="https://www.linkedin.com/company/fiachile">
-                            <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                        <a href="https://www.linkedin.com/company/fiachile">
+                            <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                         </a>
-                         <a href="https://www.facebook.com/OpiaChile/">
-                            <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                        <a href="https://www.facebook.com/OpiaChile/">
+                            <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                         </a>
                     </p>
                 </div>

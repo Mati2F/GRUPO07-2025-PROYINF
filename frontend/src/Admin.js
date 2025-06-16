@@ -3,8 +3,16 @@ import api from './Api.js'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
+const Pagina404 = () => {
+    return (
+        <div>
+            <h1>404 Not Found</h1>
+            <p>Lo sentimos, la página que buscas no existe.</p>
+        </div>
+    );
+};
+
 function Admin() {
-    const port = process.env.PORT || 8081
 
     const [user, setUser] = useState([])
     const [auth, setAuth] = useState(false);
@@ -47,14 +55,6 @@ function Admin() {
         }
     }
     
-    const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página que buscas no existe.</p>
-            </div>
-        );
-    };
     
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
@@ -79,8 +79,8 @@ function Admin() {
                     </thead>
                     <tbody>
                         {
-                            user.map((data, i)=>(
-                                <tr key={i}>
+                            user.map((data)=>(
+                                <tr key={data.UserID}>
                                     <td>{data.userId}</td>
                                     <td>{data.rol}</td>
                                     <td>{data.correo}</td>                                    

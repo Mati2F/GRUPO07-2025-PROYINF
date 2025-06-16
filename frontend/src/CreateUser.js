@@ -4,12 +4,21 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './register.css'
 
+
+const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
+    
 export default function CreateUser() {
     const [rol, setRol] = useState('')
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [apellidos, setApellidos] = useState('')
-    const port = process.env.PORT || 8081
 
     const navigate = useNavigate();
 
@@ -63,15 +72,6 @@ export default function CreateUser() {
         fetchPermission();
     }, []);
 
-    const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página que buscas no existe.</p>
-            </div>
-        );
-    };
-    
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
     }
@@ -96,24 +96,24 @@ export default function CreateUser() {
                 <form className="form-container" onSubmit={handleSubmit}>
                     <h2 className = "form-container h2">Agregar usuario</h2>
                     <div className='mb-2'>
-                        <label htmlFor="">Rol</label>
-                        <input type='text' placeholder='Ingresar rol' className='form-control' required
+                        <label htmlFor="rol">Rol</label>
+                        <input type='text' id="rol" placeholder='Ingresar rol' className='form-control' required
                         onChange={e => setRol(e.target.value)}></input>
                     </div>
                     <div className='mb-2'>
-                        <label htmlFor="">Email</label>
-                        <input type='email' placeholder='Ingresar correo' className='form-control' required
+                        <label htmlFor="correo">Email</label>
+                        <input type='email' id="correo" placeholder='Ingresar correo' className='form-control' required
                         onChange={e => setEmail(e.target.value)}></input>
                     </div>
                     <div className='mb-2'>
-                        <label htmlFor="">Nombre</label>
-                        <input type='text' placeholder='Ingresar nombre' className='form-control' required
+                        <label htmlFor="nombre">Nombre</label>
+                        <input type='text' id="nombre" placeholder='Ingresar nombre' className='form-control' required
                         onChange={e => setName(e.target.value)}></input>
 
                     </div>
                     <div className='mb-2'>
-                        <label htmlFor="">Apellidos</label>
-                        <input type='text' placeholder='Ingresar apellidos' className='form-control' required
+                        <label htmlFor="apellidos">Apellidos</label>
+                        <input type='text' id="apellidos" placeholder='Ingresar apellidos' className='form-control' required
                         onChange={e => setApellidos(e.target.value)}></input>
 
                     </div>
@@ -141,21 +141,20 @@ export default function CreateUser() {
                         <div className="footer-section">
                             <h4>Redes sociales</h4>
                             <p>
-                                {/* Aquí puedes agregar los íconos de redes sociales */}
                                 <a href="https://twitter.com/FIA_Chile">
-                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                    <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                                 </a>
                                 <a href="https://www.instagram.com/fia_chile/">
-                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                    <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                                 </a>
                                 <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                    <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                                 </a>
                                 <a href="https://www.linkedin.com/company/fiachile">
-                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                    <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                                 </a>
                                 <a href="https://www.facebook.com/OpiaChile/">
-                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                    <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                                 </a>
                             </p>
                         </div>

@@ -12,7 +12,6 @@ import AllDrafts from './AllDrafts'
 import CreateNewsletters from './CreateNewsletters'
 import SingleDraft from './SingleDraft'
 
-{/*import Images from './images.js';*/}
 
 function App() {
 

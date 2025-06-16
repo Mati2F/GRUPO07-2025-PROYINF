@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 function Login() {
-    const port = process.env.PORT || 8081;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -19,7 +18,7 @@ function Login() {
     
             // Check for a successful response
             if (res.data.message === "Login successfully") {
-                navigate('/admin/all-drafts');
+                navigate('/boletines');
             }
         } catch (err) {
             if (err.response) {
@@ -45,13 +44,6 @@ function Login() {
                         <img src="/minagri.png" alt="Logo" className="logo" />
                     </a>
                 </div>
-                <nav>
-                    <ul className="nav-menu">
-                        <li><a href="/Boletines">Boletines</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
             </header>
 
             <section className="login-section">

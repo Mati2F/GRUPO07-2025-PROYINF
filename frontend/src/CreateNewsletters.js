@@ -1,16 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import './creacion_boletines.css';
-import AllDrafts from './AllDrafts';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from './Api.js'
 
+const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+};
 function CreateNewsletters() {
     const navigate = useNavigate();
     const handleLogout = async() => {
         try{
-            const res = await api.get('/logout');
+            await api.get('/logout');
             navigate('/')
         }catch(err){
             console.log(err)
@@ -36,14 +42,7 @@ function CreateNewsletters() {
         fetchPermission();
     })
 
-    const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página que buscas no existe.</p>
-            </div>
-        );
-    };
+    
     
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
@@ -63,7 +62,7 @@ function CreateNewsletters() {
                         <li><a href="/admin/create-newsletters">Creación</a></li>
                         <li className="nav-item">
                             <button onClick={handleLogout}
-                            className="nav-link-outline-0 border-0 bg-red text-prima"  class="login-button"
+                            className="nav-link-outline-0 border-0 bg-red text-prima"  
                             href="/">Cerrar sesion</button></li>
                     </ul>
                 </nav>
@@ -102,19 +101,19 @@ function CreateNewsletters() {
                             <h4>Redes sociales</h4>
                             <p>
                                 <a href="https://twitter.com/FIA_Chile">
-                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                    <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                                 </a>
                                 <a href="https://www.instagram.com/fia_chile/">
-                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                    <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                                 </a>
                                 <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                    <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                                 </a>
                                 <a href="https://www.linkedin.com/company/fiachile">
-                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                    <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                                 </a>
                                 <a href="https://www.facebook.com/OpiaChile/">
-                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                    <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                                 </a>
                             </p>
                         </div>

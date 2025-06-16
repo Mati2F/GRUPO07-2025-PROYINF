@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react'
 import './inicio.css'
 import axios from 'axios'
 import api from './Api.js'
-import { useNavigate } from 'react-router-dom';
 
 function Home() {
-    const [auth, setAuth] = useState(false);
+    const [, setAuth] = useState(false);
     axios.defaults.withCredentials = true;
     
     useEffect(()=>{
@@ -40,12 +39,12 @@ function Home() {
                         <li><a href="/Boletines">Boletines</a></li>
                         <li><a href="/">Solutions</a></li>
                         <li><a href="/">Contact</a></li>
-                        <li><a href="/Login" class="login-button">Inicia sesión</a></li>
+                        <li><a href="/Login" className="login-button">Inicia sesión</a></li>
                     </ul>
                 </nav>
             </header>
-            <section class="main-section">
-                <div class="main-content">
+            <section className="main-section">
+                <div className="main-content">
                     <h1>FUNDACIÓN PARA LA INNOVACIÓN AGRARIA</h1>
                     <h2>27 años</h2>
                     <p>Promoviendo procesos de innovación en la Agricultura de CHILE.</p>
@@ -53,7 +52,7 @@ function Home() {
             </section>
 
             <footer>
-                <div class="footer-logos">
+                <div className="footer-logos">
                     <img src="./minagri.png" alt="Logo Ministerio de Agricultura"/>
                 </div>
             </footer>

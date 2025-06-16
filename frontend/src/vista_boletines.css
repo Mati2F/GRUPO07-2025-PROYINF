@@ -116,7 +116,7 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    width: 100%;
+    width: 20px;
     box-sizing: border-box;
 }
 
@@ -170,11 +170,4 @@ p, ul {
 .social-media ul {
     display: flex;
     gap: 10px;
-}
-
-.boletin-container, .borrador-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
-    gap: 20px; /* Espacio entre los boletines */
-    padding: 20px;
 }

@@ -1,13 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import './vista_boletines.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import api from './Api.js'
-import {Link} from 'react-router-dom'
+
+const Pagina404 = () => {
+        return (
+            <div>
+                <h1>404 Not Found</h1>
+                <p>Lo sentimos, la página que buscas no existe.</p>
+            </div>
+        );
+    };
 
 function AllDrafts() {
     const [auth, setAuth] = useState(false);
-    const [message, setMessage] = useState('');
+    const [,setMessage] = useState(''); //const [message, setMessage] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState(false);
     const navigate = useNavigate();
@@ -21,7 +29,7 @@ function AllDrafts() {
     
     const handleLogout = async () => {
         try{
-            const res = await api.get('/logout');
+            await api.get('/logout'); //const res = await api.get('/logout');
             navigate('/');
         }catch (error){
             console.log(error);
@@ -89,14 +97,7 @@ function AllDrafts() {
 
     }, []) // Empty dependency array means this runs once on mount
 
-    const Pagina404 = () => {
-        return (
-            <div>
-                <h1>404 Not Found</h1>
-                <p>Lo sentimos, la página que buscas no existe.</p>
-            </div>
-        );
-    };
+    
     
     if (!auth) {
         return <Pagina404 />; // Renderiza la página 404 si no está autenticado
@@ -121,9 +122,10 @@ function AllDrafts() {
                             <li>VIGIFIA</li>
                             <li><a href="/admin/all-drafts">Borradores</a></li>
                             <li><a href="/admin/create-newsletters">Creación</a></li>
+                            <li><a href="/boletines">Boletines</a></li>
                             <li className="nav-item">
                                 <button onClick={handleLogout}
-                                    className="nav-link-outline-0 border-0 bg-red text-prima" class="login-button"
+                                    className="nav-link-outline-0 border-0 bg-red text-prima"
                                     href="/">Cerrar sesion</button></li>
                         </ul>
                     </nav>
@@ -153,22 +155,19 @@ function AllDrafts() {
                                     <input
                                         type="checkbox"
                                         checked={ordenRecientesCreacion}
-                                        onChange={manejarOrdenRecientesCreacion}
-                                    />
+                                        onChange={manejarOrdenRecientesCreacion}/>
                                     Recientes por Creación
                                 </label>
                                 <label>
                                     <input
                                         type="checkbox"
                                         checked={ordenRecientesMod}
-                                        onChange={manejarOrdenRecientesMod}
-                                    />
+                                        onChange={manejarOrdenRecientesMod}/>
                                     Recientes por Modificación
                                 </label>
                             </div>
                             <div className="grid-boletines">
-                                {images &&
-                                    images.map((ima) => (
+                                {images?.map((ima) => (
                                     <div key={ima.id} className="card">
                                         <img className="borradorIMG" src="/BoletinFia.jpg" alt={`Borrador ${ima.id}`} />
                                         <p>
@@ -204,19 +203,19 @@ function AllDrafts() {
                             <h4>Redes sociales</h4>
                             <p>
                                 <a href="https://twitter.com/FIA_Chile">
-                                    <img className = "iconoX" src = "/iconos/X.png"></img>
+                                    <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
                                 </a>
                                 <a href="https://www.instagram.com/fia_chile/">
-                                    <img className = "iconoI" src = "/iconos/instagram.png"></img>
+                                    <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
                                 </a>
                                 <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                                    <img className = "iconoY" src = "/iconos/youtube.png"></img>
+                                    <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
                                 </a>
                                 <a href="https://www.linkedin.com/company/fiachile">
-                                    <img className = "iconoL" src = "/iconos/linkedin.png"></img>
+                                    <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
                                 </a>
                                 <a href="https://www.facebook.com/OpiaChile/">
-                                    <img className = "iconoF" src = "/iconos/facebook.png"></img>
+                                    <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
                                 </a>
                             </p>
                         </div>
