@@ -3,6 +3,7 @@ import './individual_boletines.css';
 import api from './Api.js'
 import axios from 'axios'
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import Footer from './Footer.js'
 
 const Pagina404 = () => {
         return (
@@ -89,46 +90,7 @@ function SingleDraft() {
         </div>
     </section>
 
-    <footer>
-        <div className="footer-container">
-            <div className="footer-left">
-                <img src="./minagri.png" alt="MINAGRI logo" />
-            </div>
-            <div className="footer-right">
-                <div className="footer-section">
-                    <h4>Sitios de interés</h4>
-                    <p>MINAGRI</p>
-                    <p>FIA</p>
-                    <p>BIBLIOTECA DIGITAL FIA</p>
-                </div>
-                <div className="footer-section">
-                    <h4>Contacto</h4>
-                    <p>Loreley 1582, La Reina, Santiago</p>
-                    <p>Teléfono: +562 2431 3000</p>
-                </div>
-                <div className="footer-section">
-                    <h4>Redes sociales</h4>
-                    <p>
-                        <a href="https://twitter.com/FIA_Chile">
-                            <img className = "iconoX" src = "/iconos/X.png" alt="X"></img>
-                        </a>
-                        <a href="https://www.instagram.com/fia_chile/">
-                            <img className = "iconoI" src = "/iconos/instagram.png" alt="Instagram"></img>
-                        </a>
-                        <a href="https://www.youtube.com/c/Fundaci%C3%B3nparalaInnovaci%C3%B3nAgraria">
-                            <img className = "iconoY" src = "/iconos/youtube.png" alt="Youtube"></img>
-                        </a>
-                        <a href="https://www.linkedin.com/company/fiachile">
-                            <img className = "iconoL" src = "/iconos/linkedin.png" alt="Linkedin"></img>
-                        </a>
-                        <a href="https://www.facebook.com/OpiaChile/">
-                            <img className = "iconoF" src = "/iconos/facebook.png" alt="Facebook"></img>
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <Footer />
 </div>
   )
 }
