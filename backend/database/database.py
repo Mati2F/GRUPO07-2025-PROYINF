@@ -2,7 +2,6 @@ from sqlmodel import create_engine, SQLModel, Session, text, SQLModel, Column, I
 from datetime import datetime, date
 
 servername = ".\\SQLEXPRESS"
-#servername = "DESKTOP-4VTMM2I"
 db_name = "grupo07"
 driver = "ODBC+Driver+17+for+SQL+Server"
 
